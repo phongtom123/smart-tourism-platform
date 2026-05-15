@@ -1,0 +1,27 @@
+sequenceDiagram
+    autonumber
+    actor User as Du khách
+    participant App as MAUI App
+    participant Geo as GeofenceEngineService
+    participant GPS as MAUI Geolocation
+    participant Audio as Audio Player
+
+    User->>App: Mở màn hình bản đồ và cho phép GPS
+    App->>Geo: InitializeGeofenceAsync()
+    Geo-->>App: Bắt đầu polling mỗi 3 giây
+
+    loop Mỗi 3 giây
+        Geo->>GPS: GetLocationAsync()
+        GPS-->>Geo: Lat/Lon hiện tại
+        Geo->>Geo: So khớp với danh sách POI trong radius 10m
+
+        alt Đi vào vùng POI mới
+            Geo-->>App: EnteredGeofence(poi)
+            App-->>User: Hiển thị banner "Sắp phát sau 3 giây"
+            Geo->>Geo: Chờ 3 giây
+            Geo->>Audio: Play(audio theo ngôn ngữ đang chọn)
+            Audio-->>User: Tự động phát audio guide
+        else Chưa vào vùng POI
+            Geo-->>App: Giữ trạng thái idle
+        end
+    end

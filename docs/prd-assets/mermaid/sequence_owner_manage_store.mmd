@@ -1,0 +1,26 @@
+sequenceDiagram
+    autonumber
+    actor Owner as Chủ sở hữu
+    participant Web as Owner Dashboard
+    participant OwnerAPI as OwnerController
+    participant StoreSvc as StoreManagementService
+    participant DB as MySQL
+    participant Admin as Admin Dashboard
+
+    Owner->>Web: Tạo mới hoặc cập nhật gian hàng
+    Web->>OwnerAPI: POST/PUT /api/owner/stores
+    OwnerAPI->>StoreSvc: ValidateStoreRequest(request)
+    StoreSvc->>DB: Insert/Update gianhang
+
+    alt Tạo mới
+        DB-->>StoreSvc: Lưu với trạng thái cho_duyet
+        StoreSvc-->>OwnerAPI: OwnerStoreDto
+        OwnerAPI-->>Web: Kết quả thành công
+        Web-->>Owner: Hiển thị trạng thái chờ duyệt
+        OwnerAPI-->>Admin: Thông báo có gian hàng mới
+    else Cập nhật gian hàng đã có
+        DB-->>StoreSvc: Bản ghi đã cập nhật
+        StoreSvc-->>OwnerAPI: OwnerStoreDto
+        OwnerAPI-->>Web: Kết quả thành công
+        Web-->>Owner: Làm mới danh sách gian hàng
+    end

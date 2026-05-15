@@ -1,0 +1,60 @@
+flowchart LR
+    User(("Người dùng app"))
+
+    subgraph App["Ứng dụng du lịch thông minh Vĩnh Khánh"]
+        direction TB
+
+        UC_Open(["Mở app"])
+        UC_CheckToken(["Kiểm tra token truy cập"])
+        UC_RegisterPackage(["Đăng ký gói dịch vụ"])
+        UC_PayQr(["Quét QR thanh toán"])
+        UC_LoginQr(["Quét QR token đăng nhập"])
+
+        UC_Map(["Xem bản đồ gian hàng"])
+        UC_List(["Xem danh sách gian hàng"])
+        UC_Search(["Tìm kiếm gian hàng"])
+        UC_StoreDetail(["Xem thông tin gian hàng"])
+        UC_FoodDetail(["Xem thông tin món ăn"])
+
+        UC_AppLanguage(["Đổi ngôn ngữ app"])
+        UC_AudioLanguage(["Đổi ngôn ngữ audio"])
+        UC_PlayAudio(["Nghe audio mô tả"])
+        UC_Geofence(["Tự động phát audio khi đến gần"])
+
+        UC_Offline(["Xem dữ liệu offline"])
+        UC_Settings(["Cài đặt"])
+        UC_ResetAccess(["Xóa / reset token truy cập"])
+    end
+
+    User --> UC_Open
+    User --> UC_RegisterPackage
+    User --> UC_LoginQr
+    User --> UC_Map
+    User --> UC_List
+    User --> UC_Search
+    User --> UC_StoreDetail
+    User --> UC_FoodDetail
+    User --> UC_AppLanguage
+    User --> UC_AudioLanguage
+    User --> UC_PlayAudio
+    User --> UC_Geofence
+    User --> UC_Offline
+    User --> UC_Settings
+
+    UC_Open -. include .-> UC_CheckToken
+    UC_RegisterPackage -. include .-> UC_PayQr
+    UC_RegisterPackage -. include .-> UC_CheckToken
+    UC_LoginQr -. include .-> UC_CheckToken
+
+    UC_Map -. include .-> UC_List
+    UC_Search -. extend .-> UC_List
+    UC_StoreDetail -. include .-> UC_FoodDetail
+    UC_StoreDetail -. include .-> UC_PlayAudio
+    UC_Geofence -. triggers .-> UC_PlayAudio
+
+    UC_Settings -. include .-> UC_ResetAccess
+
+    classDef actor fill:#ffffff,stroke:#111827,stroke-width:1px,color:#111827;
+    classDef usecase fill:#ffffff,stroke:#111827,stroke-width:1px,color:#111827;
+    class User actor;
+    class UC_Open,UC_CheckToken,UC_RegisterPackage,UC_PayQr,UC_LoginQr,UC_Map,UC_List,UC_Search,UC_StoreDetail,UC_FoodDetail,UC_AppLanguage,UC_AudioLanguage,UC_PlayAudio,UC_Geofence,UC_Offline,UC_Settings,UC_ResetAccess usecase;

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell
+    x:Class="MauiApp1.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:main="clr-namespace:MauiApp1.Main"
+    xmlns:auth="clr-namespace:MauiApp1.Views.Auth"
+    xmlns:maps="clr-namespace:MauiApp1.Views.Maps">
+
+    <TabBar>
+        <ShellContent
+            Title="Main"
+            ContentTemplate="{DataTemplate main:MainPage}" />
+    </TabBar>
+</Shell>

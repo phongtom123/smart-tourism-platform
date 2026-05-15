@@ -1,0 +1,42 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#f8fafc", "primaryBorderColor": "#475569", "primaryTextColor": "#0f172a", "lineColor": "#334155", "tertiaryColor": "#ffffff", "fontFamily": "Arial"}}}%%
+flowchart TD
+    A([Bắt đầu]) --> B["Hệ thống tải trang POI Map hoặc trang chi tiết gian hàng"]
+    B --> C{"Người dùng đang ở đâu?"}
+
+    C -->|Popup POI Map| D["poi_map.php gán POI_ADMIN_MAP_DATA và POI_ADMIN_MAP_CONFIG"]
+    C -->|Chi tiết gian hàng| E["branchdetail2.php kiểm tra quyền admin hoặc chủ gian hàng"]
+
+    D --> F["Người dùng chọn gian hàng trên bản đồ hoặc trong danh sách"]
+    F --> G["openInfo hoặc openLocalInfo tạo khung Daily Visits"]
+    G --> H["renderCalendarHeatmap(poiId, container)"]
+
+    E --> I["branchdetail2.php lấy dailyVisits từ DB theo idGianHang"]
+    I --> J["store_form_render_heatmap dailyVisits bằng PHP"]
+    J --> K["Hiển thị heat map trên trang chi tiết"]
+    K --> Z([Kết thúc luồng trang chi tiết])
+
+    H --> L{"poi._dailyVisits có sẵn trong payload?"}
+    L -->|Có| M["Gán vào heatmapDataCache và dùng ngay"]
+    L -->|Không| N{"Đã có trong heatmapDataCache?"}
+
+    N -->|Có| O["Lấy dữ liệu từ cache"]
+    N -->|Không| P{"Đang có request đang chạy?"}
+
+    P -->|Có| Q["Chờ heatmapPromiseCache trả kết quả"]
+    P -->|Không| R["fetch api/poi_visits.php?id=poiId"]
+    R --> S{"API trả về hợp lệ?"}
+    S -->|Có| T["Lưu dữ liệu vào heatmapDataCache"]
+    S -->|Không| U["Hiển thị Error loading data hoặc Failed to fetch data"]
+    U --> ZZ([Kết thúc luồng popup lỗi])
+
+    M --> V["Tính ngày bắt đầu 365 ngày, gridStart, gridEnd"]
+    O --> V
+    Q --> V
+    T --> V
+
+    V --> W["Tính maxCount, visitCount, activeDays"]
+    W --> X["Render nhãn tháng, nhãn Mon Wed Fri, các ô ngày, legend Less More"]
+    X --> Y["Gắn tooltip hover hiển thị ngày và số visits cụ thể"]
+    Y --> ZA["Cache HTML heat map theo poiId"]
+    ZA --> ZB["Hiển thị Daily Visits trong popup POI"]
+    ZB --> ZC([Kết thúc luồng popup thành công])

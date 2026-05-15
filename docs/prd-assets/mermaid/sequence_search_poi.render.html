@@ -1,0 +1,71 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+html, body { margin: 0; padding: 0; background: white; }
+body { font-family: 'Segoe UI', Arial, sans-serif; }
+.wrapper { padding: 32px; }
+.mermaid { display: inline-block; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+<div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor User as Du kh&#225;ch
+    participant App as PoiMapPage
+    participant Poi as PoiService
+    participant Cache as AppDataCacheService
+    participant API as ApiService
+    participant SQLite as SQLiteService
+    participant List as Danh s&#225;ch kết quả
+    participant Map as Bản đồ
+
+    User-&gt;&gt;App: Mở m&#224;n h&#236;nh kh&#225;m ph&#225;
+    App-&gt;&gt;Poi: GetAllPoisAsync()
+    Poi-&gt;&gt;Cache: GetAsync(lang)
+
+    alt C&#243; internet
+        Cache-&gt;&gt;API: GetAppDataAsync(lang)
+        API--&gt;&gt;Cache: AppDataResponse
+        Cache-&gt;&gt;SQLite: UpsertCacheAsync(appdata_lang)
+        Cache--&gt;&gt;Poi: Dữ liệu mới nhất
+    else Offline / API lỗi
+        Cache-&gt;&gt;SQLite: GetCacheIfFreshAsync(appdata_lang)
+        SQLite--&gt;&gt;Cache: Cache c&#242;n hạn hoặc rỗng
+        Cache--&gt;&gt;Poi: Dữ liệu fallback
+    end
+
+    Poi-&gt;&gt;Poi: BuildSearchText(t&#234;n, địa chỉ, m&#244; tả, m&#243;n ăn)
+    Poi--&gt;&gt;App: List&lt;PoiItem&gt;
+    App-&gt;&gt;App: Lưu _allPois v&#224; render danh s&#225;ch ban đầu
+
+    User-&gt;&gt;App: Nhập từ kh&#243;a t&#236;m kiếm
+    App-&gt;&gt;App: OnSearchTextChanged()
+    App-&gt;&gt;App: ApplySmartSearch(query)
+    App-&gt;&gt;App: NormalizeSearchText(query)
+
+    loop Với mỗi POI
+        App-&gt;&gt;App: ScorePoiSearchMatch(...)
+    end
+
+    alt C&#243; kết quả
+        App-&gt;&gt;List: Clear + render lại card kết quả
+        App-&gt;&gt;Map: RefreshVisiblePins()
+        App--&gt;&gt;User: Hiển thị POI khớp theo t&#234;n, m&#243;n, địa chỉ
+    else Kh&#244;ng c&#243; kết quả
+        App-&gt;&gt;List: Hiển thị empty state
+        App-&gt;&gt;Map: RefreshVisiblePins()
+        App--&gt;&gt;User: Th&#244;ng b&#225;o kh&#244;ng t&#236;m thấy kết quả
+    end
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+window.mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'loose' });
+</script>
+</body>
+</html>

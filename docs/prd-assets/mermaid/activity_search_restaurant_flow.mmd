@@ -1,0 +1,46 @@
+flowchart TD
+    A([Bắt đầu]) --> B[App tải danh sách quán từ cache/API]
+    B --> C[Hiển thị màn hình bản đồ với list quán]
+    C --> D{Người dùng hành động}
+
+    %% LUỒNG 1: KHÁM PHÁ - KHÔNG TÌM KIẾM
+    D -->|Không nhập từ khóa| E[Sắp xếp theo khoảng cách<br/>từ vị trí người dùng]
+    E --> F[Hiển thị danh sách quán<br/>gần nhất trên list]
+
+    %% LUỒNG 2: TÌM KIẾM THEO TỪ KHÓA
+    D -->|Nhập từ khóa vào thanh tìm kiếm| G[Chuẩn hóa text<br/>từ khóa + loại dấu]
+    G --> H[Tính điểm tìm kiếm<br/>cho mỗi quán]
+
+    H --> I{Điểm tìm kiếm<br/>là bao nhiêu?}
+
+    I -->|Điểm cao| J["Tên quán khớp từ khóa<br/>hoặc tên món ăn khớp"]
+    I -->|Điểm trung bình| K["Mô tả hoặc địa chỉ<br/>có chứa từ khóa"]
+    I -->|Điểm 0| L[Loại bỏ khỏi kết quả]
+
+    J --> M[Sắp xếp kết quả]
+    K --> M
+
+    M --> N["Sắp xếp theo:<br/>1. Điểm tìm kiếm cao nhất<br/>2. Khoảng cách gần nhất<br/>3. Tên quán A-Z"]
+
+    N --> O{Có kết quả?}
+
+    O -->|Không| P["Hiển thị thông báo<br/>không tìm thấy"]
+    P --> G
+
+    O -->|Có| Q[Hiển thị danh sách kết quả<br/>và số lượng kết quả]
+
+    F --> R[Người dùng chọn quán]
+    Q --> R
+
+    R --> S[Hiển thị chi tiết quán<br/>- Tên, địa chỉ, mô tả<br/>- Hình ảnh, danh sách món ăn<br/>- Âm thanh giới thiệu]
+
+    S --> T{Người dùng chọn thao tác}
+
+    T -->|Chọn món ăn| U[Xem hình ảnh/chi tiết món]
+    T -->|Thay đổi ngôn ngữ| V[Tải lại âm thanh<br/>giới thiệu theo ngôn ngữ mới]
+    T -->|Quay lại| D
+
+    U --> D
+    V --> D
+
+    D --> ZZ([Kết thúc])

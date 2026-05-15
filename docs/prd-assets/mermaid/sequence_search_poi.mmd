@@ -1,0 +1,48 @@
+sequenceDiagram
+    autonumber
+    actor User as Du khách
+    participant App as PoiMapPage
+    participant Poi as PoiService
+    participant Cache as AppDataCacheService
+    participant API as ApiService
+    participant SQLite as SQLiteService
+    participant List as Danh sách kết quả
+    participant Map as Bản đồ
+
+    User->>App: Mở màn hình khám phá
+    App->>Poi: GetAllPoisAsync()
+    Poi->>Cache: GetAsync(lang)
+
+    alt Có internet
+        Cache->>API: GetAppDataAsync(lang)
+        API-->>Cache: AppDataResponse
+        Cache->>SQLite: UpsertCacheAsync(appdata_lang)
+        Cache-->>Poi: Dữ liệu mới nhất
+    else Offline / API lỗi
+        Cache->>SQLite: GetCacheIfFreshAsync(appdata_lang)
+        SQLite-->>Cache: Cache còn hạn hoặc rỗng
+        Cache-->>Poi: Dữ liệu fallback
+    end
+
+    Poi->>Poi: BuildSearchText(tên, địa chỉ, mô tả, món ăn)
+    Poi-->>App: List<PoiItem>
+    App->>App: Lưu _allPois và render danh sách ban đầu
+
+    User->>App: Nhập từ khóa tìm kiếm
+    App->>App: OnSearchTextChanged()
+    App->>App: ApplySmartSearch(query)
+    App->>App: NormalizeSearchText(query)
+
+    loop Với mỗi POI
+        App->>App: ScorePoiSearchMatch(...)
+    end
+
+    alt Có kết quả
+        App->>List: Clear + render lại card kết quả
+        App->>Map: RefreshVisiblePins()
+        App-->>User: Hiển thị POI khớp theo tên, món, địa chỉ
+    else Không có kết quả
+        App->>List: Hiển thị empty state
+        App->>Map: RefreshVisiblePins()
+        App-->>User: Thông báo không tìm thấy kết quả
+    end

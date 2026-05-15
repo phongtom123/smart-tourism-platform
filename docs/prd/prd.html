@@ -1,0 +1,1639 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRD - Vĩnh Khánh Smart Tourism</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17202a;
+      --muted: #5f6b7a;
+      --line: #d9e0e8;
+      --paper: #ffffff;
+      --soft: #f5f7fa;
+      --accent: #0f766e;
+      --accent-2: #b45309;
+      --blue: #1d4ed8;
+      --danger: #b91c1c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: #edf1f5;
+      line-height: 1.58;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 24px auto 56px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 42px rgba(23, 32, 42, 0.08);
+    }
+
+    header {
+      padding: 36px 42px 28px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 14px 0 0;
+      max-width: 860px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 7px 10px;
+      font-size: 13px;
+      color: #304255;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px 42px;
+      background: #fbfcfe;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    nav a {
+      color: var(--blue);
+      text-decoration: none;
+      border: 1px solid #dbeafe;
+      background: #eff6ff;
+      padding: 6px 9px;
+      font-size: 13px;
+    }
+    .nav-dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-dropdown > a {
+      display: inline-block;
+    }
+    .nav-dropdown-menu {
+      position: absolute;
+      top: calc(100% - 1px);
+      left: 0;
+      min-width: 360px;
+      padding: 16px 10px 10px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      box-shadow: 0 10px 24px rgba(23, 32, 42, 0.12);
+      display: none;
+      z-index: 10;
+      gap: 10px;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown:focus-within .nav-dropdown-menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .nav-group {
+      border: 1px solid #e6edf5;
+      background: #fbfdff;
+      padding: 8px;
+    }
+    .nav-group-title {
+      margin: 0 0 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #304255;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .nav-group a {
+      display: block;
+      margin: 4px 0;
+      border-color: #e2e8f0;
+      background: #f8fafc;
+      color: #1e3a8a;
+    }
+
+    main {
+      padding: 28px 42px 42px;
+    }
+
+    section {
+      margin-top: 34px;
+      padding-top: 2px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 26px;
+      letter-spacing: 0;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      margin: 24px 0 8px;
+      font-size: 19px;
+    }
+
+    p { margin: 8px 0; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .card {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 16px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #0f172a;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 8px;
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      color: #166534;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .status.partial {
+      border-color: #fed7aa;
+      background: #fff7ed;
+      color: #9a3412;
+    }
+
+    .status.todo {
+      border-color: #fecaca;
+      background: #fef2f2;
+      color: #991b1b;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 9px 10px;
+      vertical-align: top;
+    }
+
+    th {
+      text-align: left;
+      background: var(--soft);
+      color: #243447;
+    }
+
+    code {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      padding: 1px 4px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.92em;
+    }
+
+    ul {
+      margin: 8px 0 18px 20px;
+      padding: 0;
+    }
+
+    li { margin: 5px 0; }
+
+    .diagram {
+      margin: 14px 0 26px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 12px;
+      overflow: auto;
+    }
+
+    .diagram[data-diagram-tabs] {
+      width: min(1100px, calc(100vw - 48px));
+      max-width: calc(100vw - 48px);
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .diagram[data-diagram-tabs] .diagram-switch {
+      width: 100%;
+    }
+
+    .diagram img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .print-diagram-img {
+      display: none;
+    }
+
+    .diagram.has-print-image > .print-diagram-img,
+    .diagram-panel.has-print-image > .print-diagram-img {
+      display: block;
+    }
+
+    .diagram.has-print-image > .mxgraph,
+    .diagram.has-print-image > body,
+    .diagram-panel.has-print-image > .mxgraph,
+    .diagram-panel.has-print-image > body {
+      display: none;
+    }
+
+    .diagram iframe {
+      display: block;
+      width: 100%;
+      border: 0;
+      background: #fff;
+    }
+
+    .diagram[data-diagram-tabs] iframe {
+      min-height: 520px;
+    }
+
+    .diagram.wide img {
+      max-width: none;
+      width: 1200px;
+    }
+
+    .diagram-switch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 12px;
+    }
+
+    .diagram-tab {
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      color: var(--text);
+      padding: 8px 12px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .diagram-tab.is-active {
+      border-color: var(--accent);
+      background: #ccfbf1;
+      color: #0f766e;
+    }
+
+    .diagram-panel[hidden] {
+      display: none;
+    }
+
+    .diagram-panel.is-active {
+      display: flex;
+      justify-content: center;
+    }
+
+    .diagram[data-diagram-tabs] .diagram-panel,
+    .diagram[data-diagram-tabs] .mxgraph {
+      min-width: 0;
+      width: auto;
+      max-width: 100%;
+    }
+
+    .diagram[data-diagram-tabs] .mxgraph {
+      margin: 0 auto;
+    }
+
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: #f0fdfa;
+      padding: 13px 15px;
+      margin: 14px 0;
+    }
+
+    .warning {
+      border-left-color: var(--accent-2);
+      background: #fff7ed;
+    }
+
+    .danger {
+      border-left-color: var(--danger);
+      background: #fef2f2;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 18px 42px;
+      color: var(--muted);
+      font-size: 13px;
+      background: #fbfcfe;
+    }
+
+    @media (max-width: 860px) {
+      .page { width: 100%; margin: 0; border-left: 0; border-right: 0; }
+      header, nav, main, footer { padding-left: 18px; padding-right: 18px; }
+      nav { position: static; }
+      .grid, .grid.two { grid-template-columns: 1fr; }
+      table { font-size: 13px; }
+      .diagram[data-diagram-tabs] {
+        width: calc(100vw - 36px);
+        max-width: calc(100vw - 36px);
+      }
+      .diagram.wide img {
+        width: 100%;
+      }
+      .nav-dropdown-menu {
+        position: static;
+        min-width: 100%;
+        width: 100%;
+      }
+      .nav-dropdown:hover .nav-dropdown-menu,
+      .nav-dropdown:focus-within .nav-dropdown-menu {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @page {
+      size: A4 landscape;
+      margin: 10mm;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        line-height: 1.42;
+      }
+
+      .page {
+        width: 100%;
+        margin: 0;
+        border: 0;
+        box-shadow: none;
+      }
+
+      header,
+      main,
+      footer {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      nav,
+      .diagram-switch,
+      script {
+        display: none !important;
+      }
+
+      section {
+        break-inside: auto;
+        page-break-inside: auto;
+      }
+
+      h2,
+      h3,
+      table,
+      .card,
+      .callout {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .diagram,
+      .diagram[data-diagram-tabs] {
+        width: 100%;
+        max-width: 100%;
+        margin: 4mm 0;
+        padding: 3mm;
+        overflow: visible;
+        transform: none;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .diagram-panel,
+      .diagram-panel[hidden],
+      .diagram-panel.is-active {
+        display: block !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
+        margin: 0 0 8mm;
+      }
+
+      .diagram-panel + .diagram-panel {
+        break-before: page;
+        page-break-before: always;
+      }
+
+      .diagram-panel[hidden] {
+        visibility: visible;
+      }
+
+      .print-diagram-img {
+        display: block;
+      }
+
+      .has-print-image > .mxgraph,
+      .has-print-image > body,
+      .diagram.has-print-image > .mxgraph,
+      .diagram.has-print-image > body {
+        display: none !important;
+      }
+
+      .diagram img,
+      .diagram.wide img,
+      .print-diagram-img {
+        max-width: 100% !important;
+        width: auto !important;
+        max-height: 170mm;
+        object-fit: contain;
+      }
+
+      .diagram iframe,
+      .mxgraph,
+      .mxgraph svg {
+        max-width: 100% !important;
+        max-height: 168mm !important;
+        overflow: visible !important;
+      }
+
+      table {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>PRD - Vĩnh Khánh Smart Tourism</h1>
+      <p class="subtitle">
+        Tài liệu yêu cầu sản phẩm được viết lại theo project hiện tại: mobile app .NET MAUI,
+        backend ASP.NET Core, dashboard CS_admin, cơ sở dữ liệu MySQL, bộ hình draw.io trong thư mục và lịch sử commit gần đây.
+      </p>
+      <div class="meta">
+        <span class="pill">Phiên bản 2.7</span>
+        <span class="pill">Cập nhật 23/04/2026</span>
+        <span class="pill">Trạng thái Draft</span>
+        <span class="pill">Phạm vi App + API + Dashboard + DB</span>
+      </div>
+    </header>
+
+    <nav aria-label="Mục lục">
+      <a href="#overview">Tổng quan</a>
+      <a href="#scope">Phạm vi</a>
+      <div class="nav-dropdown">
+        <a href="#features">Chức năng</a>
+        <div class="nav-dropdown-menu" role="menu" aria-label="Danh mục chức năng">
+          <div class="nav-group">
+            <p class="nav-group-title">App</p>
+            <a href="#feature-3-1">3.1 Luồng QR token</a>
+            <a href="#feature-3-2">3.2 Xem thông tin gian hàng</a>
+            <a href="#feature-3-3">3.3 Gần vị trí người dùng</a>
+            <a href="#feature-3-4">3.4 Nghe audio thuyết minh</a>
+            <a href="#feature-3-5">3.5 Tìm kiếm gian hàng thông minh</a>
+            <a href="#feature-3-6">3.6 Đổi ngôn ngữ</a>
+            <a href="#feature-3-7">3.7 Phát audio khi đến gần</a>
+            <a href="#feature-3-8">3.8 Thanh toán online và giá trị trả về</a>
+            <a href="#feature-3-9">3.9 Xem Tour</a>
+            <a href="#feature-3-10">3.10 Cơ chế Queue & Concurrency</a>
+          </div>
+          <div class="nav-group">
+            <p class="nav-group-title">Admin/Owner Web</p>
+            <!-- <a href="#features-owner-dashboard">Owner Dashboard</a>
+            <a href="#features-admin-dashboard">Admin Dashboard</a> -->
+            <a href="#feature-3-11">3.11 Đăng nhập</a>
+            <a href="#feature-3-12">3.12 Đăng ký</a>
+            <a href="#feature-3-13">3.13 Xem chi tiết gian hàng</a>
+            <a href="#feature-3-14">3.14 Sửa thông tin gian hàng</a>
+            <a href="#feature-3-15">3.15 Thêm món ăn</a>
+            <a href="#feature-3-16">3.16 Xem POIMap</a>
+            <a href="#feature-3-17">3.17 Quản lý thiết bị thời gian thực</a>
+            <a href="#feature-3-18">3.18 Xem hóa đơn</a>
+            <a href="#feature-3-19">3.19 Quản lý yêu cầu</a>
+            <a href="#feature-3-20">3.20 Quản lý gói dịch vụ</a>
+            <a href="#feature-3-21">3.21 Heatmap (Bản đồ nhiệt)</a>
+            <a href="#feature-3-22">3.22 Quản lý Tour</a>
+          </div>
+        </div>
+      </div>
+      <!-- <a href="#access">QR token</a> -->
+      <a href="#data">Dữ liệu</a>
+      <a href="#diagrams">Bộ sơ đồ</a>
+      <a href="#api">API</a>
+      <a href="#nfr">Phi chức năng</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+
+    <main>
+      <section id="overview">
+        <h2>1. Tổng quan</h2>
+        <p>
+          Vĩnh Khánh Smart Tourism giúp du khách mua gói truy cập, vào app bằng token,
+          khám phá gian hàng trên bản đồ/danh sách, xem món ăn, nghe audio mô tả theo ngôn ngữ
+          và tự động phát audio khi đến gần địa điểm.
+        </p>
+        <div class="grid">
+          <div class="card">
+            <h3>Mobile App</h3>
+            <p>MAUI app cho du khách: access token, QR, gói dịch vụ, bản đồ, tìm kiếm, audio, ngôn ngữ, offline cache.</p>
+          </div>
+          <div class="card">
+            <h3>Backend API</h3>
+            <p>ASP.NET Core API xử lý auth, access session, gian hàng, món ăn, admin/owner, TTS và MySQL.</p>
+          </div>
+          <div class="card">
+            <h3>Dashboard</h3>
+            <p>CS_admin PHP dashboard cho admin và chủ quản lý quản lý tài khoản, gian hàng, món ăn, gói dịch vụ.</p>
+          </div>
+        </div>
+
+        <h3>Căn cứ từ git</h3>
+        <table>
+          <thead>
+            <tr><th>Commit</th><th>Nội dung PRD sử dụng</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>2677a5f</code></td><td>Fix app bugs, access pages, image/audio/lang.</td></tr>
+            <tr><td><code>cfaa5d1</code></td><td>Fix logic QR token và cập nhật activity/sequence access.</td></tr>
+            <tr><td><code>791cbad</code></td><td>Gói dịch vụ, QR mua gói, bypass thanh toán.</td></tr>
+            <tr><td><code>8577f4e</code></td><td>Admin/backend features, request gian hang, service packages.</td></tr>
+            <tr><td><code>c9908b4</code></td><td>Đăng ký web cho chủ quản lý.</td></tr>
+            <tr><td><code>b1987ae</code></td><td>Ngôn ngữ app, audio, geofence.</td></tr>
+            <tr><td><code>fdd005f</code></td><td>SQLite/offline cache.</td></tr>
+            <tr><td><code>2dca51f</code></td><td>Bản đồ.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="scope">
+        <h2>2. Phạm vi hiện tại</h2>
+        <div class="grid two">
+          <div class="card">
+            <h3>Trong MVP</h3>
+            <ul>
+              <li>Kiểm tra token khi mở app.</li>
+              <li>Đăng ký gói dịch vụ và tạo token theo gói.</li>
+              <li>Một QR token đăng nhập gửi qua email.</li>
+              <li>Token chỉ dùng trên một thiết bị.</li>
+              <li>Bản đồ/danh sách/tìm kiếm/chi tiết gian hàng và món ăn.</li>
+              <li>Audio guide, geofence 10m, polling 3 giây.</li>
+              <li>SQLite cache TTL 12 giờ.</li>
+              <li>Admin/owner dashboard.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Ngoài MVP</h3>
+            <ul>
+              <li>Webhook thanh toán thật.</li>
+              <li>QR khôi phục riêng.</li>
+              <li>Token dùng chung nhiều máy.</li>
+              <li>Analytics nâng cao.</li>
+              <li>Production release store.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout warning">
+          Luồng thanh toán hiện tại là mô phỏng: app hiển thị QR thanh toán và dùng bypass để tạo token.
+          Khi lên production cần thay bằng webhook/xác thực giao dịch thật.
+        </div>
+      </section>
+
+      <section id="features">
+        <h2>3. Chức năng</h2>
+        <div class="diagram has-print-image">
+<img class="print-diagram-img" src="../prd-assets/mermaid/usecase.drawio.png" alt="Use case tổng thể">
+          
+
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Access & Package</h3>
+            <p>Mở app, validate token, đăng ký gói, nhận QR token email, quét lại QR token trên đúng máy.</p>
+            <span class="status">Implemented</span>
+          </div>
+          <div class="card">
+            <h3>Explore</h3>
+            <p>Xem bản đồ, danh sách, tìm kiếm, chi tiết gian hàng, chi tiết món ăn.</p>
+            <span class="status">Implemented</span>
+          </div>
+          <div class="card">
+            <h3>Language & Audio</h3>
+            <p>Đổi ngôn ngữ app/audio, nghe audio mô tả, auto-play khi vào vùng geofence.</p>
+            <span class="status">Implemented</span>
+          </div>
+          <div class="card">
+            <h3>Offline Cache</h3>
+            <p>Memory cache + SQLite cache, fallback khi API/mạng không sẵn sàng.</p>
+            <span class="status">Implemented</span>
+          </div>
+          <div class="card">
+            <h3 id="features-owner-dashboard">Owner Dashboard</h3>
+            <p>Đăng ký, gửi yêu cầu gian hàng, quản lý gian hàng/món ăn, upload ảnh.</p>
+            <span class="status">Implemented</span>
+          </div>
+          <div class="card">
+            <h3 id="features-admin-dashboard">Admin Dashboard</h3>
+            <p>Quản lý tài khoản, gian hàng, món ăn, yêu cầu, gói dịch vụ.</p>
+            <span class="status">Implemented</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="access">
+        <h2 id="feature-3-1">3.1 Luồng QR token</h2>
+        <div class="diagram qr-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng QR token">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="qr-activity-panel" data-diagram-target="qr-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="qr-sequence-panel" data-diagram-target="qr-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel has-print-image" id="qr-activity-panel" role="tabpanel">
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/activity_access_flow_current.png" alt="Activity QR token"><!-- draw.io activity diagram -->
+            
+          </div>
+          <div class="diagram-panel has-print-image" id="qr-sequence-panel" role="tabpanel">
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/sequence_qr_access.png" alt="Sequence QR token"><!-- draw.io sequence diagram -->
+            
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Một QR</td><td>Chỉ có QR token đăng nhập, không có QR khôi phục riêng.</td></tr>
+            <tr><td>Một máy</td><td>Token được khóa vào <code>clientDeviceId</code> khi tạo gói.</td></tr>
+            <tr><td>Quét lại</td><td>Nếu mất token local, quét lại QR trong email trên đúng máy để vào app.</td></tr>
+            <tr><td>Sai máy</td><td>Máy khác hoặc máy reset làm đổi ID sẽ bị từ chối.</td></tr>
+          </tbody>
+        </table>
+        
+        <h2 id="feature-3-2">3.2 Xem thông tin gian hàng</h2>
+        <div class="diagram store-info-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng xem thông tin gian hàng">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="store-info-activity-panel" data-diagram-target="store-info-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="store-info-sequence-panel" data-diagram-target="store-info-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="store-info-activity-panel" role="tabpanel">
+            <!-- draw.io activity diagram -->
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-04.png" alt="S? ?? 04">
+          </div>
+          <div class="diagram-panel" id="store-info-sequence-panel" role="tabpanel">
+            <!-- draw.io sequence diagram -->
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-05.png" alt="S? ?? 05">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Ưu tiên cache</td><td><code>GianHangService</code> đọc dữ liệu từ <code>AppDataCacheService.GetAsync(lang)</code> trước để mở chi tiết nhanh và hỗ trợ trường hợp offline.</td></tr>
+            <tr><td>Fallback API</td><td>Khi không có cache hoặc fallback nhưng có Internet, app gọi <code>ApiService.GetAppDataAsync(lang)</code> rồi lưu lại cache mới.</td></tr>
+            <tr><td>Không có dữ liệu</td><td>Nếu không có cache và không có Internet, service trả về <code>AppData</code> rỗng và luồng xử lý tiếp như không tìm thấy gian hàng.</td></tr>
+            <tr><td>Theo ID POI</td><td>Chi tiết gian hàng được tìm bằng <code>poi.IDChiNhanh</code>; nếu không khớp thì hiển thị thông báo không tìm thấy.</td></tr>
+            <tr><td>Hiển thị chi tiết</td><td>Khi tìm thấy gian hàng, app focus POI, mở detail sheet, nạp danh sách ngôn ngữ và áp dụng ngôn ngữ đang chọn.</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="feature-3-3">3.3 Hiển thị gian hàng/địa điểm gần vị trí người dùng</h2>
+        <div class="diagram nearby-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng hiển thị gian hàng gần người dùng">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="nearby-activity-panel" data-diagram-target="nearby-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="nearby-sequence-panel" data-diagram-target="nearby-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="nearby-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-06.png" alt="S? ?? 06">
+          </div>
+          <div class="diagram-panel" id="nearby-sequence-panel" role="tabpanel" hidden>
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-07.png" alt="S? ?? 07">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lấy vị trí</td><td>App gọi <code>GetUserLocation()</code>; nếu không lấy được thì dùng vị trí mặc định để vẫn có danh sách gợi ý.</td></tr>
+            <tr><td>Lọc theo khoảng cách</td><td>Chỉ các gian hàng/địa điểm có tọa độ mới được tính khoảng cách bằng <code>CalculateDistance()</code>.</td></tr>
+            <tr><td>Ưu tiên gần nhất</td><td>Sau khi sắp xếp tăng dần theo khoảng cách, app chỉ hiển thị tối đa 8 địa điểm gần nhất.</td></tr>
+            <tr><td>Cache rồi API</td><td>Dữ liệu gần vị trí người dùng ưu tiên cache; thiếu cache thì gọi API, thiếu cả hai thì hiển thị trạng thái trống.</td></tr>
+            <tr><td>Kích hoạt geofence</td><td>Sau khi có danh sách phù hợp, app cập nhật target và khởi động geofence để theo dõi vùng gần người dùng.</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="feature-3-4">3.4 Nghe audio thuyết minh</h2>
+        <div class="diagram audio-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng nghe audio thuyết minh">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="audio-activity-panel" data-diagram-target="audio-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="audio-sequence-panel" data-diagram-target="audio-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="audio-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-08.png" alt="S? ?? 08">
+          </div>
+          <div class="diagram-panel has-print-image" id="audio-sequence-panel" role="tabpanel" hidden>
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/sequence_geofence_audio.png" alt="Sequence audio guide">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Chọn POI</td><td>Người dùng mở chi tiết một gian hàng/địa điểm để lấy nguồn audio thuyết minh tương ứng.</td></tr>
+            <tr><td>Kiểm tra audio</td><td>App ưu tiên audio cache; nếu chưa có thì gọi API để lấy file hoặc URL phát.</td></tr>
+            <tr><td>Phát tự động</td><td>Khi audio sẵn sàng, app phát thuyết minh theo trạng thái hiện tại của POI.</td></tr>
+            <tr><td>Offline fallback</td><td>Nếu không có mạng thì chỉ phát được khi audio đã cache trước đó.</td></tr>
+            <tr><td>Điều khiển phát</td><td>Người dùng có thể tạm dừng, tiếp tục hoặc đổi sang POI khác để phát audio mới.</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="feature-3-5">3.5 Tìm kiếm gian hàng thông minh</h2>
+        <div class="diagram smart-search-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng tìm kiếm gian hàng thông minh">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="smart-search-activity-panel" data-diagram-target="smart-search-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="smart-search-sequence-panel" data-diagram-target="smart-search-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel has-print-image" id="smart-search-activity-panel" role="tabpanel">
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/activity_search_restaurant_flow.png" alt="Activity tìm kiếm gian hàng">
+          </div>
+          <div class="diagram-panel has-print-image" id="smart-search-sequence-panel" role="tabpanel" hidden>
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/sequence_search_restaurant.png" alt="Sequence tìm kiếm gian hàng">
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Chuẩn hóa từ khóa</td><td>Từ khóa được trim, đưa về chữ thường và bỏ dấu trước khi so khớp để tăng độ chính xác.</td></tr>
+            <tr><td>Tính điểm theo vị trí khớp</td><td>Mỗi gian hàng được cộng điểm theo nơi xuất hiện từ khóa: tên quán, tên món, mô tả, địa chỉ.</td></tr>
+            <tr><td>Ưu tiên điểm cao</td><td>Kết quả được sắp xếp giảm dần theo điểm số; điểm bằng nhau thì ưu tiên gian hàng gần vị trí người dùng hơn.</td></tr>
+            <tr><td>Không có kết quả</td><td>Nếu không gian hàng nào đạt điểm tối thiểu, hiển thị trạng thái rỗng và gợi ý đổi từ khóa.</td></tr>
+            <tr><td>Hiệu năng</td><td>Giới hạn số kết quả hiển thị ban đầu để tránh lag UI, hỗ trợ tải thêm khi cần.</td></tr>
+          </tbody>
+        </table>
+
+        <table>
+          <thead>
+            <tr><th>Vị trí khớp</th><th>Điểm số</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tên quán bắt đầu bằng từ khóa</td><td>220</td></tr>
+            <tr><td>Tên quán chứa từ khóa</td><td>170</td></tr>
+            <tr><td>Tên món ăn bắt đầu bằng từ khóa</td><td>180</td></tr>
+            <tr><td>Tên món ăn chứa từ khóa</td><td>140</td></tr>
+            <tr><td>Mô tả chứa từ khóa</td><td>70</td></tr>
+            <tr><td>Địa chỉ chứa từ khóa</td><td>55</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="feature-3-6">3.6 Đổi ngôn ngữ</h2>
+        <div class="diagram language-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng đổi ngôn ngữ">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="language-activity-panel" data-diagram-target="language-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="language-sequence-panel" data-diagram-target="language-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="language-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-12.png" alt="S? ?? 12">
+          </div>
+          <div class="diagram-panel" id="language-sequence-panel" role="tabpanel" hidden>
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-13.png" alt="S? ?? 13">
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Đổi ngôn ngữ toàn cục</td><td>Khi người dùng chọn ngôn ngữ mới, app cập nhật ngôn ngữ hiện hành và áp dụng cho toàn bộ màn hình liên quan.</td></tr>
+            <tr><td>Ưu tiên dữ liệu đã có</td><td>Ứng dụng ưu tiên dữ liệu cache theo ngôn ngữ vừa chọn để phản hồi nhanh trước khi gọi API.</td></tr>
+            <tr><td>Fallback API theo ngôn ngữ</td><td>Nếu thiếu dữ liệu cache, app gọi API với tham số ngôn ngữ mới và đồng bộ lại cache cục bộ.</td></tr>
+            <tr><td>Giữ ngữ cảnh người dùng</td><td>Sau khi đổi ngôn ngữ, vẫn giữ POI/gian hàng đang xem, chỉ cập nhật nội dung hiển thị theo ngôn ngữ mới.</td></tr>
+            <tr><td>Đồng bộ nội dung audio</td><td>Nếu có audio thuyết minh theo ngôn ngữ mới, app tải lại metadata hoặc nguồn phát tương ứng.</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="feature-3-7">3.7 Phát audio khi đến gần</h2>
+        <div class="diagram proximity-audio-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng phát audio khi đến gần">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="proximity-audio-activity-panel" data-diagram-target="proximity-audio-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="proximity-audio-sequence-panel" data-diagram-target="proximity-audio-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="proximity-audio-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-14.png" alt="S? ?? 14">
+          </div>
+          <div class="diagram-panel has-print-image" id="proximity-audio-sequence-panel" role="tabpanel" hidden>
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/sequence_geofence_audio.png" alt="Sequence phát audio khi đến gần">
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Kích hoạt theo geofence</td><td>Audio chỉ tự phát khi người dùng đi vào vùng gần của POI/gian hàng đã được geofence engine theo dõi.</td></tr>
+            <tr><td>Ưu tiên quyền chủ động</td><td>Nếu người dùng đang phát audio thủ công hoặc vừa tạm dừng, không tự động ghi đè ngay để tránh gián đoạn trải nghiệm.</td></tr>
+            <tr><td>Không phát lặp liên tục</td><td>Áp dụng cooldown theo POI để tránh tự phát lại nhiều lần khi người dùng dao động quanh ranh giới vùng gần.</td></tr>
+            <tr><td>Fallback dữ liệu audio</td><td>Ưu tiên audio cache tại máy; nếu chưa có thì gọi API lấy nguồn phát phù hợp với ngôn ngữ hiện tại.</td></tr>
+            <tr><td>Dừng khi rời vùng</td><td>Khi người dùng ra khỏi vùng theo dõi hoặc chuyển sang POI khác, app cập nhật trạng thái phát theo chính sách dừng/chuyển track.</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="feature-3-8">3.8 Thanh toán online và giá trị trả về</h2>
+        <div class="diagram online-payment-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng thanh toán online và giá trị trả về">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="online-payment-activity-panel" data-diagram-target="online-payment-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="online-payment-sequence-panel" data-diagram-target="online-payment-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="online-payment-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-16.png" alt="S? ?? 16">
+
+          </div>
+          <div class="diagram-panel" id="online-payment-sequence-panel" role="tabpanel" hidden>
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-17.png" alt="S? ?? 17">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Yêu cầu có mạng</td><td>Thanh toán online chỉ được khởi tạo khi thiết bị có Internet; nếu offline thì app trả lỗi <code>FAILED</code> với mã như <code>NO_NETWORK</code>.</td></tr>
+            <tr><td>Khởi tạo giao dịch</td><td>Sau khi người dùng chọn gói, backend phải tạo <code>paymentRequest</code> và hóa đơn ở trạng thái <code>PENDING</code>; nếu không tạo được thì trả <code>PAYMENT_INIT_FAILED</code>.</td></tr>
+            <tr><td>Trạng thái chờ xác nhận</td><td>Khi giao dịch chưa có kết quả cuối cùng, hệ thống trả <code>PENDING</code> hoặc <code>VERIFYING</code> kèm <code>paymentRequestId</code>, <code>invoiceId</code> và lý do để app tiếp tục hiển thị trạng thái chờ.</td></tr>
+            <tr><td>Xác thực callback</td><td>Webhook/callback phải hợp lệ và đúng chữ ký; nếu callback lỗi, thiếu tin cậy hoặc chưa đối soát xong thì giao dịch không được cấp quyền ngay mà chuyển sang <code>VERIFYING</code>.</td></tr>
+            <tr><td>Kết quả thất bại</td><td>Nếu thanh toán thất bại hoặc bị người dùng hủy, backend cập nhật hóa đơn sang <code>FAILED</code> hoặc <code>CANCELLED</code> và trả lý do cho app.</td></tr>
+            <tr><td>Kết quả thành công</td><td>Chỉ khi thanh toán thành công và dữ liệu đối soát khớp, backend mới tạo quyền truy cập, khóa vào thiết bị hiện tại, sinh QR token đăng nhập và trả <code>SUCCESS</code>.</td></tr>
+            <tr><td>Dữ liệu trả về cho app</td><td>Kết quả thành công cần có tối thiểu <code>invoiceId</code>, <code>packageId</code>, <code>accessToken</code> hoặc thông tin quyền truy cập tương đương, thời hạn sử dụng và <code>qrPayload</code>; app lưu lại dữ liệu này để mở nội dung chính.</td></tr>
+            <tr><td>Email là tùy chọn</td><td>Nếu người dùng chọn nhận qua email, hệ thống gửi thêm QR token/thông tin truy cập và trả kèm trạng thái gửi mail; việc gửi mail không thay thế dữ liệu trả trực tiếp cho app.</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="feature-3-9">3.9 Xem Tour (App)</h2>
+        <p>
+          Chức năng cho phép du khách xem danh sách các tour du lịch có sẵn trong hệ thống,
+          bao gồm thông tin chi tiết về lộ trình, các điểm tham quan, thời gian và giá tour.
+          Du khách có thể chọn tour phù hợp và xem trước lộ trình trên bản đồ.
+        </p>
+        <div class="diagram view-tour-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng xem tour">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="view-tour-activity-panel" data-diagram-target="view-tour-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="view-tour-sequence-panel" data-diagram-target="view-tour-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="view-tour-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-18.png" alt="S? ?? 18">
+          </div>
+          <div class="diagram-panel" id="view-tour-sequence-panel" role="tabpanel" hidden>
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-19.png" alt="S? ?? 19">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Danh sách tour</td><td>Hiển thị tất cả tour đang hoạt động với thông tin tóm tắt: tên tour, số điểm tham quan, thời gian dự kiến và giá.</td></tr>
+            <tr><td>Chi tiết tour</td><td>Khi chọn tour, hiển thị lộ trình đầy đủ gồm danh sách các gian hàng/điểm tham quan theo thứ tự, mô tả và hình ảnh minh họa.</td></tr>
+            <tr><td>Bản đồ lộ trình</td><td>Lộ trình tour được hiển thị trên bản đồ với các marker cho từng điểm dừng và đường đi gợi ý giữa các điểm.</td></tr>
+            <tr><td>Trạng thái truy cập</td><td>Chỉ du khách đã có quyền truy cập (token hợp lệ) mới xem được chi tiết tour; nếu chưa có quyền thì hiển thị thông tin cơ bản và gợi ý đăng ký gói.</td></tr>
+            <tr><td>Ngôn ngữ</td><td>Nội dung tour hiển thị theo ngôn ngữ đã chọn của người dùng, bao gồm tên tour, mô tả và thông tin các điểm tham quan.</td></tr>
+            <tr><td>Cache offline</td><td>Dữ liệu tour được lưu cache để du khách có thể xem lại khi mất kết nối mạng; cache tuân theo cùng cơ chế TTL 12 giờ như các dữ liệu khác.</td></tr>
+          </tbody>
+        </table>
+
+        <section id="feature-3-10">
+        <h2>3.10 Cơ chế Queue và Concurrency (Xử lý Audio)</h2>
+        <p>
+          Để đảm bảo trải nghiệm người dùng không bị gián đoạn khi có nhiều sự kiện kích hoạt cùng lúc (overlapping geofences) 
+          hoặc khi hệ thống chịu tải cao (nhiều người cùng nghe tại một POI), hệ thống áp dụng cơ chế hàng đợi và xử lý song song như sau:
+        </p>
+
+        <div class="diagram queue-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn sơ đồ cơ chế">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="queue-activity-panel" data-diagram-target="queue-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="queue-sequence-panel" data-diagram-target="queue-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="queue-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-20.png" alt="S? ?? 20">
+          </div>
+          <div class="diagram-panel" id="queue-sequence-panel" role="tabpanel" hidden>
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-21.png" alt="S? ?? 21">
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Hàng đợi Trigger (App)</td><td>Khi đi vào nhiều vùng geofence chồng lấn, App đưa các trigger vào hàng đợi ưu tiên dựa trên khoảng cách (gần hơn ưu tiên trước) hoặc mức độ quan trọng của POI.</td></tr>
+            <tr><td>Ưu tiên phát</td><td>Nếu đang phát audio mà có trigger mới quan trọng hơn, hệ thống thực hiện fade-out audio cũ và phát ngay audio mới. Audio cũ được đưa vào danh sách chờ.</td></tr>
+            <tr><td>Cooldown Concurrency</td><td>Mỗi POI có thời gian cooldown (ví dụ: 5 phút) để tránh việc một thiết bị gửi request liên tục gây tải giả cho server khi người dùng đứng tại ranh giới vùng.</td></tr>
+            <tr><td>Server-side Caching</td><td>Metadata của audio (tên, mô tả, link) được lưu tại Redis/MemoryCache để phục vụ hàng ngàn request cùng lúc mà không gây nghẽn Database.</td></tr>
+            <tr><td>CDN Delivery</td><td>File audio vật lý được lưu trữ tại Cloud Storage/CDN. App tải stream trực tiếp từ CDN, giảm tải băng thông và xử lý I/O cho API Server.</td></tr>
+            <tr><td>Rate Limiting</td><td>Áp dụng giới hạn số lượng request trên mỗi Device ID để ngăn chặn tấn công DoS hoặc lỗi lặp vô hạn từ phía Client.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+        <h2 id="feature-3-11">3.11 Đăng nhập (Admin/Owner Web)</h2>
+        <p>
+          Hệ thống cung cấp giao diện đăng nhập tập trung cho Admin (quản trị hệ thống) và Owner (chủ gian hàng) 
+          để truy cập vào các công cụ quản lý tương ứng trên nền tảng web (CS_admin).
+        </p>
+        <div class="diagram login-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng đăng nhập">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="login-activity-panel" data-diagram-target="login-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="login-sequence-panel" data-diagram-target="login-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="login-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-22.png" alt="S? ?? 22">
+          </div>
+          <div class="diagram-panel has-print-image" id="login-sequence-panel" role="tabpanel" hidden>
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/sequence_login_rbac.png" alt="Sequence đăng nhập RBAC">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Xác thực</td><td>Sử dụng email/tên đăng nhập và mật khẩu để xác thực tài khoản qua API backend.</td></tr>
+            <tr><td>Phân quyền</td><td>Sau khi đăng nhập thành công, hệ thống kiểm tra Role để điều hướng (Admin vào trang tổng, Owner vào trang quản lý gian hàng riêng).</td></tr>
+            <tr><td>Bảo mật</td><td>Mật khẩu được mã hóa, sử dụng Session/JWT để duy trì trạng thái đăng nhập an toàn.</td></tr>
+            <tr><td>Quên mật khẩu</td><td>Hỗ trợ luồng khôi phục mật khẩu qua email đăng ký nếu người dùng không nhớ thông tin.</td></tr>
+          </tbody>
+        </table>
+
+      </section>     
+      
+      <section id="feature-3-12">
+        <h2>3.12 Đăng ký tài khoản (Owner Web)</h2>
+        <p>
+          Hệ thống cung cấp quy trình đăng ký cho chủ gian hàng mới để tham gia vào hệ thống Vĩnh Khánh Smart Tourism.
+        </p>
+        <div class="diagram register-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng đăng ký">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="register-activity-panel" data-diagram-target="register-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="register-sequence-panel" data-diagram-target="register-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="register-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-24.png" alt="S? ?? 24">
+          </div>
+          <div class="diagram-panel" id="register-sequence-panel" role="tabpanel" hidden>
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-25.png" alt="S? ?? 25">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Duy nhất</td><td>Email và Tên đăng nhập phải là duy nhất, không trùng lặp trong hệ thống.</td></tr>
+            <tr><td>Xác thực OTP</td><td>Yêu cầu xác thực qua Email hoặc Số điện thoại để hoàn tất quá trình đăng ký.</td></tr>
+            <tr><td>Phê duyệt</td><td>Tài khoản Owner mới đăng ký cần được Admin phê duyệt trước khi có thể bắt đầu kinh doanh.</td></tr>
+            <tr><td>Bảo mật mật khẩu</td><td>Mật khẩu phải đáp ứng độ phức tạp tối thiểu (8 ký tự, có chữ hoa, chữ thường và số).</td></tr>
+          </tbody>
+        </table>
+        
+      </section>
+
+      <section id="feature-3-13">
+        <h2>3.13 Xem chi tiết gian hàng (Admin/Owner Web)</h2>
+        <p>
+          Chức năng cho phép quản trị viên hoặc chủ gian hàng xem thông tin đầy đủ, thống kê và quản lý các thành phần bên trong một gian hàng cụ thể.
+        </p>
+        <div class="diagram store-detail-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng xem chi tiết gian hàng">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="store-detail-activity-panel" data-diagram-target="store-detail-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="store-detail-sequence-panel" data-diagram-target="store-detail-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="store-detail-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-26.png" alt="S? ?? 26">
+          </div>
+          <div class="diagram-panel" id="store-detail-sequence-panel" role="tabpanel" hidden>
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-27.png" alt="S? ?? 27">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Phân quyền truy cập</td><td>Admin xem được tất cả gian hàng; Owner chỉ xem được gian hàng thuộc sở hữu của mình.</td></tr>
+            <tr><td>Dữ liệu thời gian thực</td><td>Hiển thị trạng thái hoạt động hiện tại (Đang mở, Đã đóng) dựa trên cấu hình giờ mở cửa.</td></tr>
+            <tr><td>Thống kê cơ bản</td><td>Hiển thị số lượng món ăn, lượt check-in và đánh giá trung bình ngay tại trang chi tiết.</td></tr>
+            <tr><td>Tích hợp bản đồ</td><td>Hiển thị vị trí tọa độ của gian hàng trên mini-map trong trang chi tiết để xác định vị trí.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="feature-3-14">
+        <h2>3.14 Sửa thông tin gian hàng (Admin/Owner Web)</h2>
+        <p>
+          Chức năng cho phép người dùng có quyền quản lý cập nhật các thông tin mô tả, hình ảnh, thông tin liên hệ và các thiết lập hoạt động của gian hàng.
+        </p>
+        <div class="diagram store-edit-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng sửa thông tin gian hàng">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="store-edit-activity-panel" data-diagram-target="store-edit-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="store-edit-sequence-panel" data-diagram-target="store-edit-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="store-edit-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-28.png" alt="S? ?? 28">
+          </div>
+          <div class="diagram-panel has-print-image" id="store-edit-sequence-panel" role="tabpanel" hidden>
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/sequence_owner_manage_store.png" alt="Sequence quản lý gian hàng">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Xác thực quyền</td><td>Chỉ chủ sở hữu của gian hàng hoặc Admin cấp cao mới có quyền chỉnh sửa.</td></tr>
+            <tr><td>Dữ liệu đa ngôn ngữ</td><td>Mọi thay đổi về Tên, Mô tả phải được cập nhật cho cả 3 ngôn ngữ (Việt, Anh, Trung) nếu có.</td></tr>
+            <tr><td>Định dạng hình ảnh</td><td>Hình ảnh tải lên phải đúng định dạng (jpg, png, webp) và dung lượng không quá 5MB.</td></tr>
+            <tr><td>Lịch sử thay đổi</td><td>Hệ thống ghi lại nhật ký (Log) ai đã sửa thông tin gì và vào thời gian nào.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="feature-3-15">
+        <h2>3.15 Thêm món ăn (Owner Web)</h2>
+        <p>
+          Cho phép chủ quản lý thêm các món ăn/dịch vụ mới vào thực đơn của gian hàng, bao gồm hình ảnh minh họa, giá cả và thông tin chi tiết để hiển thị trên ứng dụng di động.
+        </p>
+        <div class="diagram add-dish-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng thêm món ăn">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="add-dish-activity-panel" data-diagram-target="add-dish-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="add-dish-sequence-panel" data-diagram-target="add-dish-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="add-dish-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-30.png" alt="S? ?? 30">
+          </div>
+          <div class="diagram-panel has-print-image" id="add-dish-sequence-panel" role="tabpanel" hidden>
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/sequence_food_crud.png" alt="Sequence thêm món ăn">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Thông tin bắt buộc</td><td>Tên món, Giá, và ít nhất 1 hình ảnh đại diện là bắt buộc.</td></tr>
+            <tr><td>Giá món ăn</td><td>Giá phải là số dương, hỗ trợ hiển thị theo VNĐ hoặc tiền tệ cấu hình.</td></tr>
+            <tr><td>Phân loại</td><td>Món ăn phải được gán vào ít nhất một Danh mục (Category) của gian hàng.</td></tr>
+            <tr><td>Đa ngôn ngữ</td><td>Hỗ trợ nhập Tên và Mô tả theo các ngôn ngữ hệ thống yêu cầu (Việt, Anh, Trung...).</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="feature-3-16">
+        <h2>3.16 Xem POIMap (Admin/Owner Web)</h2>
+        <p>
+          Cung cấp giao diện bản đồ trực quan hiển thị tất cả các điểm quan tâm (Point of Interest - POI) như gian hàng, khu di tích, tiện ích công cộng... giúp quản trị viên theo dõi mật độ và vị trí các điểm trên toàn khu vực Vĩnh Khánh.
+        </p>
+        <div class="diagram poi-map-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng xem POIMap">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="poi-map-activity-panel" data-diagram-target="poi-map-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="poi-map-sequence-panel" data-diagram-target="poi-map-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="poi-map-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-32.png" alt="S? ?? 32">
+          </div>
+          <div class="diagram-panel" id="poi-map-sequence-panel" role="tabpanel" hidden>
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-33.png" alt="S? ?? 33">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Nguồn dữ liệu</td><td>Hiển thị tọa độ từ bảng <code>gianhang</code> (với các shop) và bảng POI tùy chỉnh (nếu có).</td></tr>
+            <tr><td>Phân loại Marker</td><td>Sử dụng màu sắc hoặc icon khác nhau để phân biệt: Đang hoạt động, Tạm đóng, Di tích, Nhà vệ sinh...</td></tr>
+            <tr><td>Tính tương tác</td><td>Click vào Marker hiển thị InfoWindow chứa: Tên, Địa chỉ, Số điện thoại và nút xem chi tiết.</td></tr>
+            <tr><td>Bộ lọc</td><td>Hệ thống cho phép lọc hiển thị theo Loại điểm hoặc Trạng thái kinh doanh.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="feature-3-17">
+        <h2>3.17 Quản lý thiết bị thời gian thực (Admin Web)</h2>
+        <p>
+          Module này cho phép quản trị viên giám sát trạng thái hoạt động của các thiết bị IoT (Beacon, thiết bị phát Wifi, Cảm biến...) được lắp đặt trong khu du lịch. Dữ liệu được cập nhật liên tục qua kết nối thời gian thực để đảm bảo tính sẵn sàng của hệ thống thuyết minh tự động.
+        </p>
+        <div class="diagram device-realtime-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ quản lý thiết bị">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="device-activity-panel" data-diagram-target="device-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="device-sequence-panel" data-diagram-target="device-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="device-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-34.png" alt="S? ?? 34">
+          </div>
+          <div class="diagram-panel" id="device-sequence-panel" role="tabpanel" hidden>
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-35.png" alt="S? ?? 35">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Thời gian cập nhật</td><td>Dữ liệu trạng thái phải được cập nhật ít nhất 30 giây/lần.</td></tr>
+            <tr><td>Cảnh báo Pin</td><td>Hệ thống tự động đánh dấu đỏ các thiết bị có mức pin dưới 20%.</td></tr>
+            <tr><td>Lịch sử hoạt động</td><td>Lưu trữ log thay đổi trạng thái (Online/Offline) trong vòng 30 ngày gần nhất.</td></tr>
+            <tr><td>Quản lý nhóm</td><td>Cho phép phân nhóm thiết bị theo Khu vực (Ví dụ: Nhóm Beacon phố đi bộ, Nhóm Cảm biến bãi xe).</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="feature-3-18">
+        <h2>3.18 Xem hóa đơn (Admin/Owner Web)</h2>
+        <p>
+          Quản lý và tra cứu lịch sử giao dịch. Chủ gian hàng có thể theo dõi doanh thu hàng ngày, trong khi quản trị viên hệ thống có cái nhìn tổng thể về hoạt động kinh doanh của toàn khu vực.
+        </p>
+        <div class="diagram invoice-view-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ xem hóa đơn">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="invoice-activity-panel" data-diagram-target="invoice-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="invoice-sequence-panel" data-diagram-target="invoice-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="invoice-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-36.png" alt="S? ?? 36">
+          </div>
+          <div class="diagram-panel" id="invoice-sequence-panel" role="tabpanel" hidden>
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-37.png" alt="S? ?? 37">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Phân quyền dữ liệu</td><td>Chủ gian hàng chỉ được xem hóa đơn thuộc về <code>idGianHang</code> của mình. Admin xem toàn bộ.</td></tr>
+            <tr><td>Thông tin chi tiết</td><td>Phải hiển thị đầy đủ: Mã hóa đơn, Ngày giờ, Danh sách món ăn, Đơn giá lúc bán, Thuế/Phí, và Tổng thanh toán.</td></tr>
+            <tr><td>Trạng thái thanh toán</td><td>Phân biệt rõ: Thành công (đã nhận tiền), Đang xử lý, hoặc Đã hoàn tiền (Refunded).</td></tr>
+            <tr><td>Bảo mật</td><td>Ẩn bớt thông tin nhạy cảm của khách hàng (ví dụ: chỉ hiển thị 4 số cuối thẻ nếu thanh toán online).</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="feature-3-19">
+        <h2>3.19 Quản lý yêu cầu (Admin)</h2>
+        <p>
+          Hệ thống trung tâm để Admin xử lý các yêu cầu từ chủ gian hàng (Đăng ký gian hàng mới, thay đổi menu, báo cáo sự cố hạ tầng...). Đảm bảo mọi thay đổi quan trọng trên hệ thống đều được kiểm duyệt.
+        </p>
+        <div class="diagram request-mgmt-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ quản lý yêu cầu">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="request-activity-panel" data-diagram-target="request-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="request-sequence-panel" data-diagram-target="request-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="request-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-38.png" alt="S? ?? 38">
+          </div>
+          <div class="diagram-panel" id="request-sequence-panel" role="tabpanel" hidden>
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-39.png" alt="S? ?? 39">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tính nguyên tử</td><td>Khi Admin phê duyệt thay đổi thông tin gian hàng, dữ liệu trong bảng <code>gianhang</code> phải được cập nhật đồng thời với trạng thái yêu cầu.</td></tr>
+            <tr><td>Bắt buộc lý do</td><td>Trường hợp &quot;Từ chối&quot;, Admin bắt buộc phải nhập lý do để chủ gian hàng biết và sửa đổi.</td></tr>
+            <tr><td>Thông báo Realtime</td><td>Sử dụng hệ thống thông báo (Notification) để báo cho Admin khi có yêu cầu mới và báo cho Owner khi yêu cầu được xử lý.</td></tr>
+            <tr><td>Ghi log kiểm duyệt</td><td>Lưu trữ thông tin: Ai là người duyệt, Duyệt lúc nào, Nội dung trước và sau khi thay đổi.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="feature-3-20">
+        <h2>3.20 Quản lý gói dịch vụ (Admin)</h2>
+        <p>
+          Công cụ định nghĩa các mức phí và quyền lợi cho gian hàng. Mỗi gói dịch vụ sẽ quyết định các tính năng mà gian hàng được phép sử dụng (Ví dụ: Số lượng món ăn tối đa, quyền xuất hiện trên bản đồ ưu tiên).
+        </p>
+        <div class="diagram package-mgmt-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ quản lý gói">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="package-activity-panel" data-diagram-target="package-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="package-sequence-panel" data-diagram-target="package-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel" id="package-activity-panel" role="tabpanel">
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-40.png" alt="S? ?? 40">
+          </div>
+          <div class="diagram-panel" id="package-sequence-panel" role="tabpanel" hidden>
+            <img class="mxgraph-static-img" src="../prd-assets/generated-diagrams/mxgraph-41.png" alt="S? ?? 41">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Kế thừa quyền lợi</td><td>Việc thay đổi quyền lợi của gói (ví dụ: tăng số món ăn) sẽ áp dụng ngay cho tất cả gian hàng đang sử dụng gói đó.</td></tr>
+            <tr><td>Chính sách giá</td><td>Giá gói phải được lưu vết lịch sử (không ghi đè trực tiếp nếu có gian hàng đang nợ hóa đơn dựa trên giá cũ).</td></tr>
+            <tr><td>Thời hạn gói</td><td>Mặc định tính theo tháng (30 ngày). Hỗ trợ các gói dài hạn (6 tháng, 12 tháng) với mức chiết khấu tùy chỉnh.</td></tr>
+            <tr><td>Gói mặc định</td><td>Phải luôn có ít nhất một &quot;Gói Cơ bản&quot; (có thể miễn phí) để các gian hàng mới đăng ký sử dụng ngay.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="feature-3-21">
+        <h2>3.21 Heatmap (Bản đồ nhiệt)</h2>
+        <p>
+          Tính năng cung cấp cái nhìn trực quan về mật độ khách du lịch tại các điểm POI và gian hàng theo thời gian thực. Giúp Admin điều tiết giao thông du lịch và đánh giá hiệu quả của các địa điểm.
+        </p>
+        <div class="diagram heatmap-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ Heatmap">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="heatmap-activity-panel" data-diagram-target="heatmap-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="heatmap-sequence-panel" data-diagram-target="heatmap-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel has-print-image" id="heatmap-activity-panel" role="tabpanel">
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/activity_heatmap_logic_flow.png" alt="Activity heatmap">
+
+          </div>
+          <div class="diagram-panel has-print-image" id="heatmap-sequence-panel" role="tabpanel" hidden>
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/sequence_heatmap_logic_flow.png" alt="Sequence heatmap">
+
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Độ trễ dữ liệu</td><td>Dữ liệu GPS từ thiết bị được tổng hợp tối đa mỗi 5 phút/lần để giảm tải Server.</td></tr>
+            <tr><td>Bán kính ảnh hưởng</td><td>Điểm nóng được tính trong bán kính 20m xung quanh tọa độ thiết bị.</td></tr>
+            <tr><td>Lọc thời gian</td><td>Cho phép xem heatmap theo các mốc: 1h qua, 24h qua, hoặc theo khoảng ngày tùy chọn.</td></tr>
+            <tr><td>Bảo mật danh tính</td><td>Dữ liệu Heatmap chỉ chứa tọa độ và số lượng, không kèm theo id thiết bị hay thông tin cá nhân.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="feature-3-22">
+        <h2>3.22 Quản lý Tour (Admin Web)</h2>
+        <p>
+          Module cho phép quản trị viên tạo, chỉnh sửa, xuất bản và xóa các tour du lịch trong hệ thống.
+          Mỗi tour bao gồm thông tin mô tả, giá, thời lượng và một lộ trình gồm nhiều điểm tham quan (POI/gian hàng)
+          được sắp xếp theo thứ tự. Admin có thể quản lý trạng thái xuất bản của tour để kiểm soát nội dung hiển thị
+          trên ứng dụng di động.
+        </p>
+        <div class="diagram tour-mgmt-diagram-tabs" data-diagram-tabs>
+          <div class="diagram-switch" role="tablist" aria-label="Chọn loại sơ đồ luồng quản lý tour">
+            <button class="diagram-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="tour-mgmt-activity-panel" data-diagram-target="tour-mgmt-activity-panel">Activity</button>
+            <button class="diagram-tab" type="button" role="tab" aria-selected="false" aria-controls="tour-mgmt-sequence-panel" data-diagram-target="tour-mgmt-sequence-panel">Sequence</button>
+          </div>
+          <div class="diagram-panel has-print-image" id="tour-mgmt-activity-panel" role="tabpanel">
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/3.21-tour-mgmt-activity.png" alt="Activity quản lý tour">
+          </div>
+          <div class="diagram-panel has-print-image" id="tour-mgmt-sequence-panel" role="tabpanel" hidden>
+            
+            <img class="print-diagram-img" src="../prd-assets/mermaid/3.21-tour-mgmt-sequence.png" alt="Sequence quản lý tour">
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Quy tắc</th><th>Mô tả</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Quyền truy cập</td><td>Chỉ Admin mới có quyền tạo, sửa, xóa và thay đổi trạng thái tour. Hệ thống kiểm tra <code>IsAdminAsync</code> trước mọi thao tác.</td></tr>
+            <tr><td>Lộ trình tối thiểu</td><td>Một tour hợp lệ phải có ít nhất 2 điểm tham quan trong lộ trình; nếu không thì từ chối lưu.</td></tr>
+            <tr><td>Thứ tự điểm</td><td>Các điểm trong lộ trình được sắp xếp theo <code>order_index</code>; Admin có thể kéo thả đổi thứ tự trước khi lưu.</td></tr>
+            <tr><td>Trạng thái tour</td><td>Tour có 2 trạng thái: <code>active</code> (hiển thị trên app) và <code>hidden</code> (ẩn khỏi app). Mặc định tạo mới là <code>hidden</code>.</td></tr>
+            <tr><td>Xóa mềm</td><td>Tour không bị xóa vĩnh viễn mà được đánh dấu <code>is_deleted = 1</code> và ghi nhận thời gian xóa; yêu cầu Admin xác nhận trước khi thực hiện.</td></tr>
+            <tr><td>Transaction</td><td>Việc tạo/cập nhật tour và lộ trình được thực hiện trong một transaction để đảm bảo tính toàn vẹn dữ liệu.</td></tr>
+            <tr><td>Giá tour</td><td>Giá tour phải là số không âm; giá = 0 được hiểu là tour miễn phí.</td></tr>
+            <tr><td>Cập nhật lộ trình</td><td>Khi cập nhật lộ trình, hệ thống xóa toàn bộ điểm cũ và tạo lại theo danh sách mới (replace strategy) để tránh xữ lý diff phức tạp.</td></tr>
+            <tr><td>Bản đồ lộ trình</td><td>Giao diện quản lý lộ trình hiển thị bản đồ với các marker POI và đường nối giữa các điểm, giúp Admin hình dung lộ trình trực quan.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      
+
+      <section id="data">
+        <h2>5. Dữ liệu</h2>
+        <div class="diagram">
+          <img src="../prd-assets/mermaid/Class%20Diagram.drawio.png" alt="Class diagram database">
+        </div>
+
+        <table>
+          <thead>
+            <tr><th>Nhóm</th><th>Bảng</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tài khoản</td><td><code>taikhoan</code>, <code>admin</code>, <code>chu_quan_ly</code>, <code>khachhang</code></td></tr>
+            <tr><td>Gian hàng</td><td><code>gianhang</code>, <code>gianhangngonngu</code>, <code>hinhanhgianhang</code>, <code>yeucaugianhang</code></td></tr>
+            <tr><td>Món ăn</td><td><code>monan</code>, <code>monanngonngu</code>, <code>hinhanhmonan</code></td></tr>
+            <tr><td>Access/gói</td><td><code>goidichvu</code>, <code>thietbi</code>, <code>phien_vao_app</code>, <code>hoadon</code></td></tr>
+            <tr><td>Hóa đơn</td><td><code>chitiethoadon</code>, <code>hoadongianhang</code></td></tr>
+          </tbody>
+        </table>
+        <div class="callout">
+          Hình class diagram đang dùng file <code>Class Diagram.drawio.png</code> có sẵn trong thư mục.
+          
+        </div>
+      </section>
+
+      <section id="diagrams">
+        <h2>6. Bộ sơ đồ thiết kế trong thư mục</h2>
+        <!-- <p>
+          Hệ thống sơ đồ được tổ chức đa cấp độ để minh họa từ tổng quan đến chi tiết kỹ thuật. Nguồn file nằm tại <code>../prd-assets/mermaid/</code>.
+        </p> -->
+        
+        <!-- <div class="diagram-index">
+          <div class="diagram-level">
+            <h3>Cấp độ 1: Tổng quan (Usecase & Overview)</h3>
+            <ul>
+              <li><code>usecase.drawio.png</code>: Sơ đồ các tác nhân và chức năng chính.</li>
+              <li><code>use_case_overview.png</code>: Bản vẽ tổng quát các luồng người dùng.</li>
+            </ul>
+          </div>
+
+          <div class="diagram-level">
+            <h3>Cấp độ 2: Luồng nghiệp vụ (Activity Diagrams)</h3>
+            <ul>
+              <li><code>activity_access_flow_current.png</code>: Quy trình xác thực và truy cập hệ thống.</li>
+              <li><code>activity_search_restaurant_flow.mmd</code>: Luồng tìm kiếm và lọc gian hàng.</li>
+            </ul>
+          </div>
+
+          <div class="diagram-level">
+            <h3>Cấp độ 3: Tương tác chi tiết (Sequence Diagrams)</h3>
+            <ul>
+              <li><code>sequence_qr_access.png</code>: Quy trình quét mã QR và cấp quyền truy cập.</li>
+              <li><code>sequence_search_poi.png</code>: Tương tác giữa App, API và Map khi tìm điểm đến.</li>
+              <li><code>sequence_owner_manage_store.mmd</code>: Quy trình chủ gian hàng cập nhật thông tin.</li>
+            </ul>
+          </div>
+
+          <div class="diagram-level">
+            <h3>Cấp độ 4: Cấu trúc dữ liệu (Class Diagrams)</h3>
+            <ul>
+              <li><code>Class Diagram.drawio.png</code>: Sơ đồ thực thể quan hệ (ERD) chi tiết của Database.</li>
+              <li><code>class_system_overview.png</code>: Cấu trúc các lớp đối tượng chính trong mã nguồn.</li>
+            </ul>
+          </div>
+
+          <div class="diagram-level">
+            <h3>Tài liệu tổng hợp (Full Design Sheets)</h3>
+            <ul>
+              <li><code>GianHang-Page-3.jpg</code>: Bản thiết kế tổng hợp luồng gian hàng (Trang 3).</li>
+              <li><code>GianHang-Page-4.drawio.png</code>: Bản vẽ chi tiết các module mở rộng (Trang 4).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="diagram wide">
+          <img src="../prd-assets/mermaid/GianHang-Page-3.jpg" alt="Tổng hợp sơ đồ thiết kế">
+          <p class="caption">Hình minh họa: Bản thiết kế tổng hợp luồng gian hàng (GianHang-Page-3.jpg)</p>
+        </div> -->
+
+        <div class="file-tree-container">
+          <!-- <h3>Cấu trúc thư mục dự án (Interactive Tree)</h3> -->
+          <div class="tree">
+            <details open>
+              <summary>📁 C-SA-T (Workspace Root)</summary>
+              <ul>
+                <details>
+                  <summary>📁 C-SA-T (Mobile App - .NET MAUI)</summary>
+                  <ul>
+                    <details>
+                      <summary>📁 Views (Giao diện)</summary>
+                      <ul>
+                        <li>📄 MainPage.xaml</li>
+                        <li>📄 AppShell.xaml</li>
+                        <li>📄 App.xaml</li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>📁 Services & Models</summary>
+                      <ul>
+                        <li>📁 Services (API Calls)</li>
+                        <li>📁 Models (Data Objects)</li>
+                        <li>📁 GPS (Location Logic)</li>
+                      </ul>
+                    </details>
+                    <li>📄 MauiProgram.cs</li>
+                    <li>📄 MauiApp1.csproj</li>
+                    <li>📄 C-SA-T.sln</li>
+                  </ul>
+                </details>
+                <details>
+                  <summary>📁 CS_admin (Web Admin)</summary>
+                  <ul>
+                    <details>
+                      <summary>📁 admin</summary>
+                      <ul>
+                        <li>📄 dashboard.php</li>
+                        <li>📄 request.php</li>
+                        <li>📄 service.php</li>
+                        <li>📄 device.php</li>
+                        <li>📄 invoice.php</li>
+                        <li>📄 poi_map.php</li>
+                        <li>📄 store.php</li>
+                        <li>📄 menu.php</li>
+                        <li>📄 account.php</li>
+                        <li>📄 branchdetail2.php</li>
+                      </ul>
+                    </details>
+                    <details>
+                      <summary>📁 api</summary>
+                      <ul>
+                        <li>📄 admin_api.php</li>
+                        <li>📄 store_api.php</li>
+                      </ul>
+                    </details>
+                    <li>📄 auth.php</li>
+                    <li>📄 connect.php</li>
+                    <li>📄 index1st.php</li>
+                  </ul>
+                </details>
+                <details>
+                  <summary>📁 VinhKhanh (App Frontend)</summary>
+                  <ul>
+                    <li>📄 main.js</li>
+                    <li>📄 style.css</li>
+                  </ul>
+                </details>
+                <details>
+                  <summary>📁 prd-assets</summary>
+                  <ul>
+                    <details>
+                      <summary>📁 mermaid</summary>
+                      <ul>
+                        <li>🖼️ Class Diagram.drawio.png</li>
+                        <li>🖼️ usecase.drawio.png</li>
+                        <li>🖼️ sequence_qr_access.png</li>
+                        <li>🖼️ GianHang-Page-3.jpg</li>
+                      </ul>
+                    </details>
+                  </ul>
+                </details>
+                <li>📄 prd.html</li>
+                <li>📄 gianhang (2).sql</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="api">
+        <h2>7. API chính</h2>
+        <table>
+          <thead>
+            <tr><th>Nhóm</th><th>Endpoint</th><th>Mục đích</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Access</td><td><code>GET /api/access/validate</code></td><td>Kiểm tra token, hạn dùng, đúng thiết bị.</td></tr>
+            <tr><td>Access</td><td><code>POST /api/access/token/activate</code></td><td>Quét/kích hoạt QR token đăng nhập.</td></tr>
+            <tr><td>Access</td><td><code>POST /api/access/package/register</code></td><td>Đăng ký gói, tạo token, hóa đơn, email QR.</td></tr>
+            <tr><td>Auth</td><td><code>POST /api/auth/login</code>, <code>POST /api/auth/register</code></td><td>Đăng nhập và đăng ký tài khoản.</td></tr>
+            <tr><td>App data</td><td><code>GET /api/gianhang/appdata</code></td><td>Dữ liệu gian hàng/món ăn cho app theo ngôn ngữ.</td></tr>
+            <tr><td>Gian hàng</td><td><code>GET /api/gianhang</code>, <code>GET /api/gianhang/{id}</code></td><td>Danh sách và chi tiết gian hàng.</td></tr>
+            <tr><td>Audio</td><td><code>POST /api/gianhang/{id}/generate-audio</code></td><td>Tạo audio TTS từ mô tả.</td></tr>
+            <tr><td>Thiết bị</td><td><code>GET /api/devices-proxy.php</code></td><td>Lấy trạng thái và quản lý thiết bị đầu cuối.</td></tr>
+            <tr><td>Thanh toán</td><td><code>POST /api/payment_webhook.php</code></td><td>Tiếp nhận phản hồi từ cổng thanh toán (Momo/ZaloPay...).</td></tr>
+            <tr><td>Thống kê</td><td><code>GET /api/poi_visits.php</code></td><td>Theo dõi lượt truy cập và tương tác tại các POI.</td></tr>
+            <tr><td>Admin</td><td><code>/api/admin/request.php</code></td><td>Phê duyệt/Từ chối yêu cầu từ gian hàng.</td></tr>
+            <tr><td>Admin</td><td><code>/api/admin/service.php</code></td><td>Thiết lập và quản lý các gói dịch vụ.</td></tr>
+            <tr><td>Owner</td><td><code>/api/owner/menu.php</code></td><td>Quản lý thực đơn và món ăn.</td></tr>
+            <tr><td>Owner</td><td><code>/api/owner/invoice.php</code></td><td>Theo dõi hóa đơn và báo cáo doanh thu gian hàng.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="nfr">
+        <h2>8. Phi chức năng và tiêu chí chấp nhận</h2>
+        <table>
+          <thead>
+            <tr><th>Hạng mục</th><th>Yêu cầu</th><th>Acceptance</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Access</td><td>Token đúng máy, còn hạn.</td><td>Token sai máy bị từ chối.</td></tr>
+            <tr><td>Offline</td><td>SQLite cache TTL 12 giờ và fallback cache cũ.</td><td>Tắt API vẫn xem được data đã sync.</td></tr>
+            <tr><td>Audio</td><td>Có cache audio và không crash khi mất mạng.</td><td>Audio phát được nếu cache hoặc network sẵn sàng.</td></tr>
+            <tr><td>Role</td><td>Owner/Admin endpoint kiểm tra quyền.</td><td>Owner không sửa được gian hàng không thuộc mình.</td></tr>
+            <tr><td>Secret</td><td>Không đưa SMTP/Google key vào PRD/commit.</td><td>Dùng example/env/local secret.</td></tr>
+            <tr><td>Hiệu năng</td><td>Phân trang (Pagination) cho danh sách hóa đơn và yêu cầu.</td><td>Tải trang danh sách < 2s với 10,000 bản ghi.</td></tr>
+            <tr><td>Bảo mật Admin</td><td>Ghi Log (Audit Trail) cho mọi thao tác duyệt/từ chối.</td><td>Truy vết được người duyệt và lý do thay đổi.</td></tr>
+            <tr><td>Tính đúng đắn</td><td>Tự động ngắt Access khi gói dịch vụ hết hạn.</td><td>Thiết bị bị báo "Hết hạn" ngay khi qua ngày kết thúc gói.</td></tr>
+            <tr><td>Thông báo</td><td>Gửi Email/Push ngay khi Admin xử lý yêu cầu.</td><td>Người dùng nhận được thông báo trong vòng 30 giây.</td></tr>
+          </tbody>
+        </table>
+
+        <!-- <div class="callout danger">
+          Việc cần chốt trước production: thanh toán webhook thật, JWT/session chuẩn, đổi tên app
+          từ <code>MauiApp1</code>, và dọn bảng backup nếu không cần audit.
+        </div> -->
+      </section>
+
+      <section id="roadmap">
+        <h2>9. Roadmap</h2>
+        <table>
+          <thead>
+            <tr><th>Giai đoạn</th><th>Nội dung</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>v2.0</td><td>Chốt MVP, access token one-device, PRD/diagram, ổn định dashboard.</td></tr>
+            <tr><td>v2.1</td><td>Tích hợp payment production, webhook, đối soát hóa đơn.</td></tr>
+            <tr><td>v2.2</td><td>JWT/session, role claims, rate limit QR/token.</td></tr>
+            <tr><td>v2.3</td><td>Analytics: lượt xem, lượt nghe audio, gói bán chạy.</td></tr>
+            <tr><td>v2.4</td><td>UX polish, tên app, icon, onboarding, offline indicator.</td></tr>
+            <tr><td>v2.5</td><td>Nâng cấp logic trùng nhau và queue.<td></tr>
+            <tr><td>v2.6</td><td>Theo dõi thiết bị offline, tối ưu app mượt hơn, update payment cho app.</td></tr>
+            <tr><td>v2.7</td><td>Update payment cho web, heatmap monitoring theo dõi từng poi.</td></tr>
+
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <footer>
+      Được tổng hợp từ context project local, tài sản draw.io, ghi chú Mermaid, schema database và lịch sử git. Không bao gồm secret.
+    </footer>
+  </div>
+  <script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
+  <script>
+    document.querySelectorAll('[data-diagram-tabs]').forEach((tabs) => {
+      const buttons = tabs.querySelectorAll('[data-diagram-target]');
+      const panels = tabs.querySelectorAll('.diagram-panel');
+
+      const activate = (targetId) => {
+        buttons.forEach((button) => {
+          const active = button.dataset.diagramTarget === targetId;
+          button.classList.toggle('is-active', active);
+          button.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+
+        panels.forEach((panel) => {
+          const active = panel.id === targetId;
+          panel.hidden = !active;
+          panel.classList.toggle('is-active', active);
+        });
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => activate(button.dataset.diagramTarget));
+      });
+
+      const firstTarget = buttons[0]?.dataset.diagramTarget;
+      if (firstTarget) {
+        activate(firstTarget);
+      }
+    });
+  </script>
+</body>
+</html>
+

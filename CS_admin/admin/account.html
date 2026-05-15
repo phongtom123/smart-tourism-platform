@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Danh sách tài khoản</title>
+    <link rel="stylesheet" href="account.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="dashboard-shell">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div>
+                <div class="brand">
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h2>AdminPro</h2>
+                        <p>Hệ thống quản trị</p>
+                    </div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-item">
+                        <i class="fa-solid fa-table-cells-large"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a href="#" class="nav-item active">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Tài khoản</span>
+                    </a>
+
+                    <a href="#" class="nav-item">
+                        <i class="fa-regular fa-shield"></i>
+                        <span>Vai trò &amp; Quyền</span>
+                    </a>
+
+                    <a href="#" class="nav-item">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Cài đặt</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer-card">
+                <div class="profile-left">
+                    <div class="profile-avatar">N</div>
+                    <div class="profile-info">
+                        <h4>Nguyễn Văn A</h4>
+                        <p>admin@system.com</p>
+                    </div>
+                </div>
+
+                <button class="profile-more">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </button>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main-content">
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <h1>Admin Dashboard</h1>
+
+                <div class="topbar-actions">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Tìm kiếm tài khoản..." />
+                    </div>
+
+                    <button class="icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="dot"></span>
+          </button>
+
+                    <button class="primary-btn">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Thêm người dùng</span>
+          </button>
+                </div>
+            </header>
+
+            <!-- CONTENT -->
+            <section class="account-page">
+                <div class="account-layout">
+                    <!-- LEFT -->
+                    <div class="account-left">
+                        <div class="page-head">
+                            <div>
+                                <h2>Danh sách Tài khoản</h2>
+                                <p>Quản lý định danh người dùng và phân cấp vai trò truy cập hệ thống.</p>
+                            </div>
+
+                            <div class="page-tabs">
+                                <button class="head-tab active">Tất cả (48)</button>
+                                <button class="head-tab">Hoạt động</button>
+                                <button class="head-tab">Bị khóa</button>
+                            </div>
+                        </div>
+
+                        <div class="panel account-table-panel">
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>TÊN NGƯỜI DÙNG</th>
+                                            <th>EMAIL</th>
+                                            <th>VAI TRÒ</th>
+                                            <th>NGÀY ĐĂNG KÝ</th>
+                                            <th>TÌNH TRẠNG</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td class="username">nguyenvan_a</td>
+                                            <td>a.nguyen@email.com</td>
+                                            <td><span class="role-badge admin">ADMIN</span></td>
+                                            <td>20/10/2023</td>
+                                            <td>
+                                                <span class="status-text active">
+                          <span class="mini-dot"></span> Hoàn tất
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="username">tran_thi_b</td>
+                                            <td>b.tran@email.com</td>
+                                            <td><span class="role-badge manager">MANAGER</span></td>
+                                            <td>15/11/2023</td>
+                                            <td>
+                                                <span class="status-text active">
+                          <span class="mini-dot"></span> Hoàn tất
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="username">le_van_c</td>
+                                            <td>c.le@email.com</td>
+                                            <td><span class="role-badge staff">STAFF</span></td>
+                                            <td>01/12/2023</td>
+                                            <td>
+                                                <span class="status-text pending">
+                          <span class="mini-dot"></span> Chờ duyệt
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="username">pham_d</td>
+                                            <td>d.pham@email.com</td>
+                                            <td><span class="role-badge staff">STAFF</span></td>
+                                            <td>05/12/2023</td>
+                                            <td>
+                                                <span class="status-text active">
+                          <span class="mini-dot"></span> Hoàn tất
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="username">pham_d</td>
+                                            <td>d.pham@email.com</td>
+                                            <td><span class="role-badge staff">STAFF</span></td>
+                                            <td>05/12/2023</td>
+                                            <td>
+                                                <span class="status-text active">
+                          <span class="mini-dot"></span> Hoàn tất
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="username">pham_d</td>
+                                            <td>d.pham@email.com</td>
+                                            <td><span class="role-badge staff">STAFF</span></td>
+                                            <td>05/12/2023</td>
+                                            <td>
+                                                <span class="status-text active">
+                          <span class="mini-dot"></span> Hoàn tất
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="username">pham_d</td>
+                                            <td>d.pham@email.com</td>
+                                            <td><span class="role-badge staff">STAFF</span></td>
+                                            <td>05/12/2023</td>
+                                            <td>
+                                                <span class="status-text active">
+                          <span class="mini-dot"></span> Hoàn tất
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="username">pham_d</td>
+                                            <td>d.pham@email.com</td>
+                                            <td><span class="role-badge staff">STAFF</span></td>
+                                            <td>05/12/2023</td>
+                                            <td>
+                                                <span class="status-text active">
+                          <span class="mini-dot"></span> Hoàn tất
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="username">pham_d</td>
+                                            <td>d.pham@email.com</td>
+                                            <td><span class="role-badge staff">STAFF</span></td>
+                                            <td>05/12/2023</td>
+                                            <td>
+                                                <span class="status-text active">
+                          <span class="mini-dot"></span> Hoàn tất
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="username">pham_d</td>
+                                            <td>d.pham@email.com</td>
+                                            <td><span class="role-badge staff">STAFF</span></td>
+                                            <td>05/12/2023</td>
+                                            <td>
+                                                <span class="status-text active">
+                          <span class="mini-dot"></span> Hoàn tất
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="table-footer">
+                            <p>Hiển thị 1-10 trên 48 người dùng</p>
+
+                            <div class="pagination">
+                                <button><i class="fa-solid fa-chevron-left"></i></button>
+                                <button class="active">1</button>
+                                <button>2</button>
+                                <button>3</button>
+                                <button><i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="account-right">
+                        <div class="panel permission-panel">
+                            <h3>Phân quyền Vai trò</h3>
+                            <p class="permission-desc">
+                                Chọn người dùng và gán vai trò tương ứng để phân quyền hệ thống.
+                            </p>
+
+                            <div class="section-label">NGƯỜI DÙNG ĐANG CHỌN</div>
+                            <div class="selected-user">
+                                <div class="selected-avatar">LT</div>
+                                <div>
+                                    <h4>le_van_c</h4>
+                                    <p>Nhân viên mới</p>
+                                </div>
+                            </div>
+
+                            <div class="section-label role-label">CHỌN VAI TRÒ GÁN</div>
+
+                            <label class="role-option">
+                <input type="radio" name="role">
+                <span class="radio-ui"></span>
+                <div class="role-option-content">
+                  <strong class="purple">Admin</strong>
+                  <p>Toàn quyền hệ thống</p>
+                </div>
+              </label>
+
+                            <label class="role-option">
+                <input type="radio" name="role">
+                <span class="radio-ui"></span>
+                <div class="role-option-content">
+                  <strong class="blue">Manager</strong>
+                  <p>Quản lý đội ngũ &amp; báo cáo</p>
+                </div>
+              </label>
+
+                            <label class="role-option selected">
+                <input type="radio" name="role" checked>
+                <span class="radio-ui"></span>
+                <div class="role-option-content">
+                  <strong class="dark">Staff</strong>
+                  <p>Truy cập dữ liệu giới hạn</p>
+                </div>
+              </label>
+
+                            <button class="update-btn">Cập nhật Vai trò</button>
+                        </div>
+
+                        <div class="role-chart-card">
+                            <h4>Phân bố Vai trò</h4>
+
+                            <div class="role-chart-item">
+                                <div class="chart-row">
+                                    <span>Admin</span>
+                                    <strong>4</strong>
+                                </div>
+                                <div class="progress-line purple-line">
+                                    <span style="width: 15%;"></span>
+                                </div>
+                            </div>
+
+                            <div class="role-chart-item">
+                                <div class="chart-row">
+                                    <span>Manager</span>
+                                    <strong>12</strong>
+                                </div>
+                                <div class="progress-line blue-line">
+                                    <span style="width: 45%;"></span>
+                                </div>
+                            </div>
+
+                            <div class="role-chart-item">
+                                <div class="chart-row">
+                                    <span>Staff</span>
+                                    <strong>32</strong>
+                                </div>
+                                <div class="progress-line cyan-line">
+                                    <span style="width: 82%;"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

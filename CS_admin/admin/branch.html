@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết chi nhánh</title>
+    <link rel="stylesheet" href="branch.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="dashboard-shell">
+        <!-- SIDEBAR GIỮ GIỐNG DASHBOARD -->
+        <aside class="sidebar">
+            <div>
+                <div class="brand">
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-table-cells-large"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h2>Hệ thống Admin</h2>
+                        <p>ADMINISTRATOR</p>
+                    </div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-item">
+                        <i class="fa-solid fa-chart-column"></i>
+                        <span>Tổng quan</span>
+                    </a>
+
+                    <a href="#" class="nav-item active">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Chi nhánh</span>
+                    </a>
+
+                    <a href="#" class="nav-item">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Nhân viên</span>
+                    </a>
+
+                    <a href="#" class="nav-item">
+                        <i class="fa-solid fa-box"></i>
+                        <span>Sản phẩm</span>
+                    </a>
+
+                    <a href="#" class="nav-item">
+                        <i class="fa-solid fa-receipt"></i>
+                        <span>Đơn hàng</span>
+                    </a>
+
+                    <a href="#" class="nav-item">
+                        <i class="fa-solid fa-chart-simple"></i>
+                        <span>Báo cáo</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div>
+                <div class="sidebar-divider"></div>
+
+                <a href="#" class="nav-item settings-link">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+                <div class="profile-card">
+                    <div class="profile-left">
+                        <div class="profile-avatar">L</div>
+                        <div class="profile-info">
+                            <h4>Lan Hương</h4>
+                            <p>System Admin</p>
+                        </div>
+                    </div>
+                    <button class="profile-more">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main-content">
+            <!-- TOPBAR GIỮ KIỂU CŨ -->
+            <header class="topbar">
+                <h1>Admin Dashboard</h1>
+
+                <div class="topbar-actions">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Tìm kiếm..." />
+                    </div>
+
+                    <button class="icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="dot"></span>
+          </button>
+
+                    <button class="icon-btn">
+            <i class="fa-solid fa-gear"></i>
+          </button>
+
+                    <div class="top-avatar">
+                        <img src="https://i.pravatar.cc/100?img=32" alt="avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- CONTENT -->
+            <section class="branch-page">
+                <div class="breadcrumb">
+                    <span>Branches</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                    <strong>Chi nhánh Quận 1</strong>
+                </div>
+
+                <div class="branch-layout">
+                    <!-- LEFT -->
+                    <div class="branch-left">
+                        <!-- HERO -->
+                        <div class="panel branch-hero">
+                            <div class="branch-hero-left">
+                                <div class="branch-thumb">
+                                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=400&auto=format&fit=crop" alt="branch">
+                                </div>
+
+                                <div class="branch-info">
+                                    <h2>Chi nhánh Quận 1</h2>
+                                    <div class="branch-meta">
+                                        <span class="branch-status">
+                      <span class="status-dot"></span> Đang hoạt động
+                                        </span>
+                                        <span class="branch-id">ID: BR-001</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="branch-hero-actions">
+                                <button class="light-btn">
+                  <i class="fa-solid fa-pen"></i>
+                  Chỉnh sửa
+                </button>
+
+                                <button class="primary-btn">
+                  <i class="fa-solid fa-circle-pause"></i>
+                  Tạm dừng
+                </button>
+                            </div>
+                        </div>
+
+                        <!-- STATS -->
+                        <div class="stats-row">
+                            <div class="panel stat-card">
+                                <p class="stat-title">DOANH THU THÁNG</p>
+                                <h3>1.250.000.000 đ</h3>
+                                <span class="stat-growth positive">
+                  <i class="fa-solid fa-arrow-trend-up"></i> +12.5%
+                </span>
+                            </div>
+
+                            <div class="panel stat-card">
+                                <p class="stat-title">SỐ ĐƠN HÀNG</p>
+                                <h3>8,432</h3>
+                                <span class="stat-growth positive">
+                  <i class="fa-solid fa-arrow-trend-up"></i> +5.2%
+                </span>
+                            </div>
+
+                            <div class="panel stat-card">
+                                <p class="stat-title">MÓN ĂN ĐANG BÁN</p>
+                                <h3>42</h3>
+                                <span class="stat-note">Duy trì ổn định</span>
+                            </div>
+                        </div>
+
+                        <!-- CHART -->
+                        <div class="panel chart-panel">
+                            <div class="panel-header">
+                                <h3>Xu hướng doanh thu (7 ngày qua)</h3>
+                                <button class="select-btn">
+                  Tuần này
+                  <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                            </div>
+
+                            <div class="chart-area">
+                                <div class="chart-grid-line l1"></div>
+                                <div class="chart-grid-line l2"></div>
+                                <div class="chart-grid-line l3"></div>
+
+                                <svg viewBox="0 0 760 280" preserveAspectRatio="none" class="chart-svg">
+                  <defs>
+                    <linearGradient id="branchAreaFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#22cbcb" stop-opacity="0.22"/>
+                      <stop offset="100%" stop-color="#22cbcb" stop-opacity="0.02"/>
+                    </linearGradient>
+                  </defs>
+
+                  <path
+                    d="M 0 210
+                       C 70 190, 120 170, 170 135
+                       C 225 100, 285 110, 340 145
+                       C 390 178, 450 185, 510 160
+                       C 565 138, 620 85, 680 95
+                       C 715 102, 735 114, 760 126
+                       L 760 280 L 0 280 Z"
+                    fill="url(#branchAreaFill)">
+                  </path>
+
+                  <path
+                    d="M 0 210
+                       C 70 190, 120 170, 170 135
+                       C 225 100, 285 110, 340 145
+                       C 390 178, 450 185, 510 160
+                       C 565 138, 620 85, 680 95
+                       C 715 102, 735 114, 760 126"
+                    fill="none"
+                    stroke="#22cbcb"
+                    stroke-width="4"
+                    stroke-linecap="round">
+                  </path>
+                </svg>
+
+                                <div class="chart-labels">
+                                    <span>T2</span>
+                                    <span>T3</span>
+                                    <span>T4</span>
+                                    <span>T5</span>
+                                    <span>T6</span>
+                                    <span>T7</span>
+                                    <span>CN</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TABLE -->
+                        <div class="panel table-panel">
+                            <div class="table-header">
+                                <h3>Danh sách nhân viên</h3>
+                                <a href="#">Xem tất cả</a>
+                            </div>
+
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>HỌ VÀ TÊN</th>
+                                            <th>VAI TRÒ</th>
+                                            <th>TRẠNG THÁI</th>
+                                            <th>HÀNH ĐỘNG</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="staff-cell">
+                                                    <img src="https://i.pravatar.cc/80?img=12" alt="">
+                                                    <span>Nguyễn Văn A</span>
+                                                </div>
+                                            </td>
+                                            <td>Quản lý chi nhánh</td>
+                                            <td><span class="badge success">Đang trực</span></td>
+                                            <td class="action-cell"><i class="fa-solid fa-ellipsis-vertical"></i></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <div class="staff-cell">
+                                                    <img src="https://i.pravatar.cc/80?img=32" alt="">
+                                                    <span>Lê Thị B</span>
+                                                </div>
+                                            </td>
+                                            <td>Nhân viên bếp</td>
+                                            <td><span class="badge success">Đang trực</span></td>
+                                            <td class="action-cell"><i class="fa-solid fa-ellipsis-vertical"></i></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <div class="staff-cell">
+                                                    <img src="https://i.pravatar.cc/80?img=15" alt="">
+                                                    <span>Trần Văn C</span>
+                                                </div>
+                                            </td>
+                                            <td>Nhân viên phục vụ</td>
+                                            <td><span class="badge muted">Nghỉ ca</span></td>
+                                            <td class="action-cell"><i class="fa-solid fa-ellipsis-vertical"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="branch-right">
+                        <div class="panel info-panel">
+                            <h3>Thông tin chung</h3>
+
+                            <div class="info-list">
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                    <div>
+                                        <span>ĐỊA CHỈ</span>
+                                        <p>123 Lê Lợi, Phường Bến Thành, Quận 1, TP.HCM</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                                    <div>
+                                        <span>SỐ ĐIỆN THOẠI</span>
+                                        <p>028 3822 1234</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fa-solid fa-circle-user"></i></div>
+                                    <div>
+                                        <span>QUẢN LÝ</span>
+                                        <p>Nguyễn Văn A</p>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fa-solid fa-location-crosshairs"></i></div>
+                                    <div>
+                                        <span>TỌA ĐỘ GPS</span>
+                                        <p>10.7769° N, 106.7009° E</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel map-panel">
+                            <div class="map-box">
+                                <div class="map-phone">
+                                    <div class="map-pin"></div>
+                                </div>
+
+                                <button class="map-open-btn">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

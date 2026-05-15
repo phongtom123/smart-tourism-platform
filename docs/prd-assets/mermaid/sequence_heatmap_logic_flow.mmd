@@ -1,0 +1,59 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#f8fafc", "primaryBorderColor": "#475569", "primaryTextColor": "#0f172a", "lineColor": "#334155", "tertiaryColor": "#ffffff", "fontFamily": "Arial"}}}%%
+sequenceDiagram
+    autonumber
+    actor User as Người dùng
+    participant UI as Giao diện Admin
+    participant MapPage as poi_map.php
+    participant JS as poi-map.js
+    participant API as poi_visits.php
+    participant Detail as branchdetail2.php
+    participant DB as MySQL
+
+    Note over User,DB: Luồng 1: Bản đồ nhiệt trong cửa sổ bật lên của POI Map
+
+    User->>UI: Mở trang POI Map
+    UI->>MapPage: Tải giao diện bản đồ
+    MapPage->>DB: Lấy danh sách gian hàng
+    DB-->>MapPage: Dữ liệu gian hàng + vị trí + ảnh + dailyVisits khả dụng
+    MapPage-->>JS: Gán POI_ADMIN_MAP_DATA / POI_ADMIN_MAP_CONFIG
+
+    User->>JS: Chọn một gian hàng trên bản đồ hoặc trong danh sách
+    JS->>JS: openInfo() hoặc openLocalInfo()
+    JS->>JS: Tạo khung Lượt truy cập hằng ngày
+    JS->>JS: renderCalendarHeatmap(poiId, container)
+
+    alt dailyVisits có sẵn trong dữ liệu tải sẵn
+        JS->>JS: Đưa dữ liệu vào heatmapDataCache
+    else Chưa có trong dữ liệu tải sẵn
+        alt Đã có trong heatmapDataCache
+            JS->>JS: Dùng lại dữ liệu cache
+        else Đang có heatmapPromiseCache
+            JS->>JS: Chờ request đang chạy hoàn tất
+        else Chưa có cache
+            JS->>API: GET /api/poi_visits.php?id=poiId
+            API->>DB: SELECT ngay, soLuot FROM luot_truy_cap_ngay
+            DB-->>API: Dữ liệu lượt truy cập 365 ngày
+            API-->>JS: JSON dailyVisits
+            JS->>JS: Lưu heatmapDataCache
+        end
+    end
+
+    JS->>JS: Tính gridStart, gridEnd, totalWeeks
+    JS->>JS: Tính maxCount, visitCount, activeDays
+    JS->>JS: Render nhãn tháng, Mon/Wed/Fri, ô ngày và chú thích mức màu
+    JS->>JS: Gắn tooltip hover theo từng ô
+    JS->>JS: Cache HTML bản đồ nhiệt theo poiId
+    JS-->>User: Hiển thị bản đồ nhiệt trong popup POI
+
+    Note over User,DB: Luồng 2: Bản đồ nhiệt trong trang chi tiết gian hàng
+
+    User->>UI: Mở chi tiết gian hàng
+    UI->>Detail: Tải branchdetail2.php?idGianHang=...
+    Detail->>Detail: Kiểm tra quyền admin hoặc chủ gian hàng
+    Detail->>DB: Lấy thông tin gian hàng
+    DB-->>Detail: Dữ liệu gian hàng
+    Detail->>DB: Lấy dailyVisits theo idGianHang
+    DB-->>Detail: Dữ liệu lượt truy cập 365 ngày
+    Detail->>Detail: store_form_render_heatmap(dailyVisits)
+    Detail->>Detail: Tính tháng, ngày, level màu, totals
+    Detail-->>User: Hiển thị bản đồ nhiệt ngay trên trang chi tiết

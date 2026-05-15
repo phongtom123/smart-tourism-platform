@@ -1,8 +1,14 @@
+# Shared ignores for every app in this repository.
+
 # Build output
 **/bin/
 **/obj/
+_temp_build/
+**/bin_verify*/
+**/tempobj*/
+**/tempbuild*/
 
-# IDE and local cache
+# IDE and local caches
 **/.vs/
 **/.idea/
 **/.vscode/
@@ -10,18 +16,50 @@
 **/*.suo
 **/*.lscache
 
-# Secrets and local config
-**/appsettings.Development.json
+# Agent and runtime logs
+.codex-runlogs/
+**/.claude/
+CS_admin/logs/
+VinhKhanh/VinhKhanh/Logs/
+**/*.log
+**/hs_err_pid*.log
+**/replay_pid*.log
+
+# Local secret props and certificates
+**/Secrets.props
+**/Secret.props
 **/Secret/props.txt
+!**/Secret/props.example.txt
 **/*.keystore
 **/*.pfx
 **/*.p12
 **/*.pem
+
+# App secret folders
+**/Secret/*.json
+!**/Secret/*.example.json
+CS_admin/Secret/google-maps-browser-key.txt
+
+# Local development settings with secrets
+**/appsettings.Development.json
+!**/appsettings.Development.example.json
+**/*.local.json
 .env
 .env.*
 
-# Local dumps, backups, logs
-database/local/
+# Service account credentials
+**/Credentials/service-account.json
+**/bin/**/Credentials/service-account.json
+
+# Local database dumps, backups, and scratch data
 db_backups/
-**/*.log
-.codex-runlogs/
+database/local/
+database/backups/
+database/dumps/
+sandbox/demo_reset_*/
+
+# Temporary payloads and generated test output
+temp_*.json
+temp_*.log
+*-test-results.txt
+.local/

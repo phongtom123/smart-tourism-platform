@@ -1,0 +1,26 @@
+sequenceDiagram
+    autonumber
+    actor User
+    participant PoiMap as PoiMapPage
+    participant PoiSvc as PoiService
+    participant Cache as AppDataCacheService
+
+    User->>PoiMap: Nhập từ khóa tìm kiếm
+    PoiMap->>PoiMap: ApplySmartSearch(query)
+    
+    PoiMap->>PoiMap: NormalizeSearchText(query)
+    PoiMap->>PoiMap: ScorePoiSearchMatch()<br/>cho từng POI
+
+    alt Có kết quả
+        PoiMap->>PoiMap: Sắp xếp theo:<br/>Điểm → Khoảng cách → Tên
+        PoiMap-->>User: Hiển thị danh sách<br/>có (N) kết quả
+    else Không có kết quả
+        PoiMap-->>User: Hiển thị thông báo<br/>không tìm thấy
+    end
+
+    User->>PoiMap: Chọn quán từ danh sách
+    PoiMap->>PoiSvc: GetByIdAsync(idGianHang)
+    PoiSvc->>Cache: GetAsync(lang)
+    Cache-->>PoiSvc: AppDataResponse
+    PoiSvc-->>PoiMap: GianHang chi tiết
+    PoiMap-->>User: Hiển thị chi tiết quán

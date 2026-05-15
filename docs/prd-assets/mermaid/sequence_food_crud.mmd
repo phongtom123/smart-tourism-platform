@@ -1,0 +1,34 @@
+sequenceDiagram
+    autonumber
+    actor User as Chủ sở hữu / Admin
+    participant Web as Dashboard
+    participant FoodAPI as OwnerController hoặc AdminController
+    participant StoreSvc as StoreManagementService
+    participant DB as MySQL
+
+    User->>Web: Thêm, sửa hoặc đổi trạng thái món ăn
+
+    alt Tạo món ăn
+        Web->>FoodAPI: POST /foods
+        FoodAPI->>StoreSvc: CreateFoodAsync(request)
+        StoreSvc->>DB: Insert monan
+        DB-->>StoreSvc: Món ăn mới
+        StoreSvc-->>FoodAPI: MonAnDto
+        FoodAPI-->>Web: 200 OK
+    else Cập nhật món ăn
+        Web->>FoodAPI: PUT /foods/{id}
+        FoodAPI->>StoreSvc: UpdateFoodAsync(id, request)
+        StoreSvc->>DB: Update monan
+        DB-->>StoreSvc: Món ăn đã cập nhật
+        StoreSvc-->>FoodAPI: MonAnDto
+        FoodAPI-->>Web: 200 OK
+    else Đổi trạng thái
+        Web->>FoodAPI: PATCH /foods/{id}/status
+        FoodAPI->>StoreSvc: UpdateFoodStatusAsync(...)
+        StoreSvc->>DB: Update tinh_trang
+        DB-->>StoreSvc: Trạng thái mới
+        StoreSvc-->>FoodAPI: OperationResult
+        FoodAPI-->>Web: 200 OK
+    end
+
+    Web-->>User: Làm mới danh sách món ăn

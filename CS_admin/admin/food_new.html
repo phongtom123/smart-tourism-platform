@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thêm món ăn mới</title>
+  <link rel="stylesheet" href="food_new.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <div class="dashboard-shell">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div>
+        <div class="brand">
+          <div class="brand-icon">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <div class="brand-text">
+            <h2>Gourmet POS</h2>
+            <p>ADMIN DASHBOARD</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="#" class="nav-item active">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Menu Management</span>
+          </a>
+
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-receipt"></i>
+            <span>Orders</span>
+          </a>
+
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-users"></i>
+            <span>Customers</span>
+          </a>
+
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-box"></i>
+            <span>Inventory</span>
+          </a>
+        </nav>
+      </div>
+
+      <div>
+        <div class="sidebar-divider"></div>
+
+        <a href="#" class="nav-item settings-link">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+        </a>
+
+        <div class="profile-card">
+          <div class="profile-left">
+            <div class="profile-avatar">A</div>
+            <div class="profile-info">
+              <h4>Admin User</h4>
+              <p>admin@gourmet.com</p>
+            </div>
+          </div>
+          <button class="profile-more">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <h1>Admin Dashboard</h1>
+
+        <div class="topbar-actions">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Tìm món ăn..." />
+          </div>
+
+          <button class="icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="dot"></span>
+          </button>
+
+          <button class="light-btn top-btn">Hủy</button>
+          <button class="primary-btn top-btn">Lưu món ăn</button>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <section class="add-dish-page">
+        <div class="page-heading">
+          <div class="heading-left">
+            <div class="heading-icon">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <div>
+              <h2>Thêm món ăn mới</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider-line"></div>
+
+        <!-- IMAGE -->
+        <div class="panel upload-card">
+          <h3>Hình ảnh món ăn</h3>
+
+          <div class="upload-layout">
+            <div class="upload-preview">
+              <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=1200&auto=format&fit=crop" alt="dish">
+              <div class="upload-overlay">
+                <i class="fa-regular fa-image"></i>
+                <span>Chưa có ảnh</span>
+              </div>
+            </div>
+
+            <div class="upload-info">
+              <p>Tải lên ảnh chất lượng cao để thu hút khách hàng. Định dạng hỗ trợ: JPG, PNG. Kích thước tối đa 5MB.</p>
+              <button class="upload-btn">
+                <i class="fa-solid fa-upload"></i>
+                Tải ảnh lên
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BASIC INFO -->
+        <div class="panel form-card">
+          <h3>Thông tin cơ bản</h3>
+
+          <div class="form-group">
+            <label>Tên món ăn <span>*</span></label>
+            <input type="text" placeholder="Ví dụ: Phở Bò Tái Lăn">
+          </div>
+
+          <div class="form-row two-cols">
+            <div class="form-group">
+              <label>Mã SKU</label>
+              <input type="text" placeholder="PHO-001">
+            </div>
+
+            <div class="form-group">
+              <label>Danh mục</label>
+              <div class="select-wrap">
+                <select>
+                  <option selected disabled>Chọn danh mục</option>
+                  <option>Món chính</option>
+                  <option>Khai vị</option>
+                  <option>Đồ uống</option>
+                  <option>Tráng miệng</option>
+                </select>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row two-cols align-end">
+            <div class="form-group">
+              <label>Giá bán (VNĐ) <span>*</span></label>
+              <div class="price-wrap">
+                <input type="text" value="0">
+                <span class="currency">₫</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Trạng thái kinh doanh</label>
+              <div class="toggle-row">
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+                <span class="toggle-text">Đang kinh doanh</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Mô tả món ăn</label>
+            <textarea placeholder="Mô tả thành phần, hương vị..."></textarea>
+          </div>
+        </div>
+
+        <!-- OPTIONS -->
+        <div class="panel option-card">
+          <div class="option-card-head">
+            <h3>Tùy chọn &amp; Topping</h3>
+            <button class="add-group-btn">
+              <i class="fa-solid fa-circle-plus"></i>
+              Thêm nhóm tùy chọn
+            </button>
+          </div>
+
+          <!-- group -->
+          <div class="option-group">
+            <div class="group-head">
+              <div class="group-title">
+                <i class="fa-solid fa-grip"></i>
+                <h4>Kích cỡ</h4>
+              </div>
+              <button class="trash-btn">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+
+            <div class="option-list">
+              <div class="option-row">
+                <input type="text" value="Small">
+                <div class="mini-price-wrap">
+                  <input type="text" value="0">
+                  <span>+₫</span>
+                </div>
+                <button class="remove-btn"><i class="fa-solid fa-xmark"></i></button>
+              </div>
+
+              <div class="option-row">
+                <input type="text" value="Medium">
+                <div class="mini-price-wrap">
+                  <input type="text" value="10000">
+                  <span>+₫</span>
+                </div>
+                <button class="remove-btn"><i class="fa-solid fa-xmark"></i></button>
+              </div>
+
+              <div class="option-row">
+                <input type="text" value="Large">
+                <div class="mini-price-wrap">
+                  <input type="text" value="20000">
+                  <span>+₫</span>
+                </div>
+                <button class="remove-btn"><i class="fa-solid fa-xmark"></i></button>
+              </div>
+            </div>
+
+            <button class="add-option-btn">
+              <i class="fa-solid fa-plus"></i>
+              Thêm tùy chọn
+            </button>
+          </div>
+
+          <!-- group -->
+          <div class="option-group">
+            <div class="group-head">
+              <div class="group-title">
+                <i class="fa-solid fa-grip"></i>
+                <h4>Topping</h4>
+              </div>
+              <button class="trash-btn">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+
+            <div class="option-list">
+              <div class="option-row">
+                <input type="text" value="Extra egg">
+                <div class="mini-price-wrap">
+                  <input type="text" value="5000">
+                  <span>+₫</span>
+                </div>
+                <button class="remove-btn"><i class="fa-solid fa-xmark"></i></button>
+              </div>
+
+              <div class="option-row">
+                <input type="text" value="Extra beef">
+                <div class="mini-price-wrap">
+                  <input type="text" value="25000">
+                  <span>+₫</span>
+                </div>
+                <button class="remove-btn"><i class="fa-solid fa-xmark"></i></button>
+              </div>
+            </div>
+
+            <button class="add-option-btn">
+              <i class="fa-solid fa-plus"></i>
+              Thêm tùy chọn
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

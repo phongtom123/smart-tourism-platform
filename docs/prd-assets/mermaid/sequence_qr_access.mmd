@@ -1,0 +1,100 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#f8fafc", "primaryBorderColor": "#475569", "primaryTextColor": "#0f172a", "lineColor": "#334155", "tertiaryColor": "#ffffff", "fontFamily": "Arial"}}}%%
+sequenceDiagram
+    autonumber
+    actor User as Người dùng
+    participant App as MAUI App
+    participant Local as Bộ nhớ thiết bị
+    participant Api as API Client
+    participant Backend as Backend Access
+    participant DB as MySQL
+    participant Mail as Email Service
+
+    Note over Local: Lưu token, thông tin gói, hạn dùng<br/>và cache offline sau lần xác thực hợp lệ
+
+    User->>App: Mở app
+    App->>Local: Đọc quyền truy cập đã lưu
+
+    alt Thiết bị có kết nối mạng
+        App->>Api: Gửi token và mã thiết bị để xác thực
+        Api->>Backend: POST /api/access/validate
+        Backend->>DB: Tra cứu phiên truy cập và thiết bị
+        DB-->>Backend: Trạng thái token, hạn dùng, thiết bị đã khóa
+
+        alt Token còn hiệu lực và đúng thiết bị
+            Backend-->>Api: Quyền truy cập hợp lệ
+            Api-->>App: Cho phép truy cập
+            App->>Local: Cập nhật quyền truy cập đã xác thực
+            App-->>User: Mở nội dung chính
+        else Token hết hạn, không tồn tại hoặc sai thiết bị
+            Backend-->>Api: Từ chối quyền truy cập
+            Api-->>App: Không hợp lệ
+            App->>Local: Xóa quyền truy cập cũ
+            App-->>User: Hiển thị chọn quét QR hoặc đăng ký gói
+        end
+    else Thiết bị offline
+        App->>Local: Kiểm tra quyền truy cập offline
+
+        alt Dữ liệu offline còn hạn và đúng thiết bị
+            Local-->>App: Quyền truy cập offline hợp lệ
+            App-->>User: Mở nội dung chính ở chế độ offline
+        else Không có dữ liệu offline hợp lệ
+            Local-->>App: Không thể xác thực offline
+            App-->>User: Yêu cầu kết nối mạng để xác thực
+        end
+    end
+
+    opt Người dùng quét QR token đăng nhập
+        User->>App: Quét QR hoặc tải ảnh QR
+        App->>App: Đọc access token trong QR
+
+        alt Thiết bị offline
+            App-->>User: Không thể xác thực QR khi offline
+        else Thiết bị có kết nối mạng
+            App->>Api: Gửi QR token và mã thiết bị
+            Api->>Backend: POST /api/access/token/activate
+            Backend->>DB: Kiểm tra token, hạn dùng và thiết bị đã khóa
+            DB-->>Backend: Kết quả kiểm tra
+
+            alt QR token hợp lệ và đúng thiết bị
+                Backend->>DB: Cập nhật lần cuối hoạt động của thiết bị
+                Backend-->>Api: Kích hoạt thành công
+                Api-->>App: Thông tin quyền truy cập
+                App->>Local: Lưu quyền truy cập trên thiết bị
+                App-->>User: Mở nội dung chính
+            else QR không hợp lệ, hết hạn hoặc sai thiết bị
+                Backend-->>Api: Từ chối kích hoạt
+                Api-->>App: Lý do thất bại
+                App-->>User: Báo lỗi QR không dùng được
+            end
+        end
+    end
+
+    opt Người dùng đăng ký gói dịch vụ
+        User->>App: Chọn gói và mở QR thanh toán
+
+        alt Thiết bị offline
+            App-->>User: Cần kết nối mạng để đăng ký gói
+        else Thiết bị có kết nối mạng
+            User->>App: Xác nhận thanh toán hoặc dùng bypass test
+            App->>Api: Gửi thông tin gói, email tùy chọn và mã thiết bị
+            Api->>Backend: POST /api/access/package/register
+            Backend->>DB: Tạo/cập nhật thiết bị app_client
+            Backend->>DB: Hủy phiên cũ của thiết bị này
+            Backend->>DB: Tạo phiên truy cập và hóa đơn
+            Backend->>Backend: Tạo QR token đăng nhập
+
+            alt Người dùng chọn nhận qua email
+                Backend->>Mail: Gửi QR token đăng nhập
+                Mail-->>Backend: Trạng thái gửi email
+            else Người dùng chọn tải trực tiếp
+                Backend->>Backend: Chuẩn bị QR payload trả về app
+            end
+
+            Backend-->>Api: Token, hạn dùng và QR payload
+            Api-->>App: Đăng ký gói thành công
+            App->>Local: Lưu quyền truy cập trên thiết bị
+            App-->>User: Hiển thị QR token và nút Vào app
+            User->>App: Bấm Vào app
+            App-->>User: Mở nội dung chính
+        end
+    end

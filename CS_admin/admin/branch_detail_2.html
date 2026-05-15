@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản lý chi nhánh</title>
+  <link rel="stylesheet" href="branch_detail_2.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <div class="dashboard-shell">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div>
+        <div class="brand">
+          <div class="brand-icon">
+            <i class="fa-solid fa-table-list"></i>
+          </div>
+          <div class="brand-text">
+            <h2>Admin Console</h2>
+            <p>ENTERPRISE</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="#" class="nav-item active">
+            <i class="fa-solid fa-store"></i>
+            <span>Chi nhánh</span>
+          </a>
+
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-users"></i>
+            <span>Nhân viên</span>
+          </a>
+
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-box"></i>
+            <span>Kho hàng</span>
+          </a>
+
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-chart-simple"></i>
+            <span>Báo cáo</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer-card">
+        <div class="profile-left">
+          <div class="profile-avatar">A</div>
+          <div class="profile-info">
+            <h4>Admin User</h4>
+            <p>admin@enterprise.com</p>
+          </div>
+        </div>
+
+        <!-- <button class="profile-more" hidden>
+          <i class="fa-solid fa-gear"></i>
+        </button> -->
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <h1>Admin Dashboard</h1>
+
+        <div class="topbar-actions">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Tìm kiếm chi nhánh..." />
+          </div>
+
+          <button class="icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="dot"></span>
+          </button>
+
+          <div class="top-user">
+            <div class="top-user-info">
+              <h4>Quản lý Hệ thống</h4>
+              <p>SUPER ADMIN</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <section class="branch-page">
+        <div class="page-head">
+          <div>
+            <h2>Quản lý Chi nhánh</h2>
+            <p>Theo dõi và cập nhật thông tin các địa điểm kinh doanh của hệ thống</p>
+          </div>
+
+          <button class="primary-btn">
+            <i class="fa-solid fa-plus"></i>
+            <span>Thêm Chi nhánh mới</span>
+          </button>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-row">
+          <div class="panel stat-card">
+            <p class="stat-label">Tổng chi nhánh</p>
+            <h3>24</h3>
+          </div>
+
+          <div class="panel stat-card">
+            <p class="stat-label">Tổng phí duy trì (Tháng)</p>
+            <h3 class="accent">$42,500</h3>
+          </div>
+
+          <div class="panel stat-card">
+            <p class="stat-label">Đang hoạt động</p>
+            <h3 class="success-text">22</h3>
+          </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="panel table-panel">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>TÊN CHI NHÁNH</th>
+                  <th>ĐỊA CHỈ</th>
+                  <th>PHÍ HÀNG THÁNG</th>
+                  <th>TÌNH TRẠNG</th>
+                  <th>GPS (LAT, LON)</th>
+                  <th>THAO TÁC</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="branch-name-cell">
+                      <div class="location-badge">
+                        <i class="fa-solid fa-location-dot"></i>
+                      </div>
+                      <strong>Chi nhánh Quận 1</strong>
+                    </div>
+                  </td>
+                  <td>123 Lê Lợi, Phường Bến Thành, Quận 1, TP.HCM</td>
+                  <td class="money">$2,500</td>
+                  <td>
+                    <span class="status-badge active">
+                      <span class="mini-dot"></span>
+                      Hoạt động
+                    </span>
+                  </td>
+                  <td><span class="gps-chip">10.7769, 106.7009</span></td>
+                  <td><a class="edit-link" href="#">Chỉnh sửa</a></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="branch-name-cell">
+                      <div class="location-badge">
+                        <i class="fa-solid fa-location-dot"></i>
+                      </div>
+                      <strong>Chi nhánh Bình Thạnh</strong>
+                    </div>
+                  </td>
+                  <td>45 Xô Viết Nghệ Tĩnh, Quận Bình Thạnh, TP.HCM</td>
+                  <td class="money">$1,800</td>
+                  <td>
+                    <span class="status-badge maintenance">
+                      <span class="mini-dot"></span>
+                      Bảo trì
+                    </span>
+                  </td>
+                  <td><span class="gps-chip">10.8016, 106.7118</span></td>
+                  <td><a class="edit-link" href="#">Chỉnh sửa</a></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="branch-name-cell">
+                      <div class="location-badge">
+                        <i class="fa-solid fa-location-dot"></i>
+                      </div>
+                      <strong>Chi nhánh Thủ Đức</strong>
+                    </div>
+                  </td>
+                  <td>12 Đường Võ Văn Ngân, TP. Thủ Đức, TP.HCM</td>
+                  <td class="money">$2,000</td>
+                  <td>
+                    <span class="status-badge active">
+                      <span class="mini-dot"></span>
+                      Hoạt động
+                    </span>
+                  </td>
+                  <td><span class="gps-chip">10.8492, 106.7721</span></td>
+                  <td><a class="edit-link" href="#">Chỉnh sửa</a></td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="branch-name-cell">
+                      <div class="location-badge">
+                        <i class="fa-solid fa-location-dot"></i>
+                      </div>
+                      <strong>Chi nhánh Quận 7</strong>
+                    </div>
+                  </td>
+                  <td>88 Nguyễn Văn Linh, Quận 7, TP.HCM</td>
+                  <td class="money">$3,200</td>
+                  <td>
+                    <span class="status-badge paused">
+                      <span class="mini-dot"></span>
+                      Tạm dừng
+                    </span>
+                  </td>
+                  <td><span class="gps-chip">10.7294, 106.7210</span></td>
+                  <td><a class="edit-link" href="#">Chỉnh sửa</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <p>Hiển thị 1-4 trong số 24 chi nhánh</p>
+
+            <div class="pagination">
+              <button><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="active">1</button>
+              <button>2</button>
+              <button>3</button>
+              <span>...</span>
+              <button>6</button>
+              <button><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM CARDS -->
+        <div class="bottom-grid">
+          <div class="panel map-card">
+            <div class="card-head">
+              <h3><i class="fa-solid fa-map"></i> Phân bố địa lý</h3>
+              <a href="#">Xem toàn bản đồ</a>
+            </div>
+
+            <div class="mini-map">
+              <div class="map-pin pin-1"></div>
+              <div class="map-pin pin-2"></div>
+              <div class="map-pin pin-3"></div>
+              <div class="map-pin pin-4"></div>
+            </div>
+          </div>
+
+          <div class="panel quarter-card">
+            <div class="card-head">
+              <h3><i class="fa-solid fa-chart-column"></i> Chi phí hoạt động theo quý</h3>
+            </div>
+
+            <div class="progress-block">
+              <div class="progress-row">
+                <span class="progress-label cyan">QUÝ 1</span>
+                <strong>75%</strong>
+              </div>
+              <div class="progress-line cyan-line">
+                <span style="width:75%;"></span>
+              </div>
+            </div>
+
+            <div class="progress-block">
+              <div class="progress-row">
+                <span class="progress-label gray">QUÝ 2 (DỰ KIẾN)</span>
+                <strong class="muted">40%</strong>
+              </div>
+              <div class="progress-line gray-line">
+                <span style="width:40%;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

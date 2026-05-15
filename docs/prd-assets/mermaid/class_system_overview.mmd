@@ -1,0 +1,220 @@
+classDiagram
+    direction LR
+
+    class admin {
+        +int idAdmin
+        +int idTaiKhoan
+        +varchar hoTen
+        +varchar ghiChu
+        +datetime ngayTao
+    }
+
+    class chitiethoadon {
+        +int id
+        +int idHoaDon
+        +int idMonAn
+        +int soLuong
+        +decimal donGia
+    }
+
+    class chu_quan_ly {
+        +int idChuQuanLy
+        +int idTaiKhoan
+        +varchar hoTen
+        +varchar sdt
+        +varchar diaChi
+        +datetime ngayTao
+    }
+
+    class gianhang {
+        +int idGianHang
+        +int idChuQuanLy
+        +varchar ten
+        +varchar diaChi
+        +decimal lat
+        +decimal lon
+        +decimal vongBo
+        +enum tinhTrang
+        +decimal phiHangThang
+        +datetime ngayDangKy
+        +datetime thoiGianCapNhat
+    }
+
+    class gianhangngonngu {
+        +int id
+        +int idGianHang
+        +int idNgonNgu
+        +varchar ten
+        +varchar audioURL
+        +text moTa
+    }
+
+    class goidichvu {
+        +int idGoi
+        +varchar ten
+        +text moTa
+        +decimal gia
+        +int thoiHanNgay
+        +enum trangThai
+        +datetime ngayTao
+    }
+
+    class hinhanhgianhang {
+        +int idHinhAnh
+        +int idGianHang
+        +varchar duongDan
+    }
+
+    class hinhanhmonan {
+        +int idHinhAnh
+        +int idMonAn
+        +varchar duongDan
+    }
+
+    class hoadon {
+        +int idHoaDon
+        +int idKhachHang
+        +bigint idPhienVaoApp
+        +int idGoi
+        +varchar email
+        +decimal tongTien
+        +datetime thoiGianTao
+        +enum tinhTrang
+        +varchar ghiChu
+    }
+
+    class hoadongianhang {
+        +int idHoaDonGianHang
+        +int idGianHang
+        +decimal tongTien
+        +datetime ngayHetHan
+        +enum trangThai
+        +varchar ghiChu
+        +datetime ngayTao
+    }
+
+    class khachhang {
+        +int idKhachHang
+        +int idTaiKhoan
+        +varchar sdt
+    }
+
+    class monan {
+        +int idMonAn
+        +int idGianHang
+        +varchar ten
+        +decimal donGia
+        +datetime thoiGianCapNhat
+        +enum tinhTrang
+    }
+
+    class monanngonngu {
+        +int id
+        +int idMonAn
+        +int idNgonNgu
+        +varchar ten
+        +text moTa
+    }
+
+    class ngonngu {
+        +int idNgonNgu
+        +varchar maNgonNgu
+        +varchar ten
+        +enum trangThai
+    }
+
+    class phien_vao_app {
+        +bigint id
+        +int idThietBi
+        +varchar maThietBi
+        +int idGoi
+        +text qrRaw
+        +varchar accessToken
+        +datetime batDauLuc
+        +datetime hetHanLuc
+        +enum trangThai
+    }
+
+    class taikhoan {
+        +int idTaiKhoan
+        +varchar email
+        +varchar matKhau
+        +varchar username
+        +enum loaiTaiKhoan
+        +enum tinhTrang
+        +enum tinhTrangDangKy
+        +datetime ngayTao
+    }
+
+    class thietbi {
+        +int idThietBi
+        +varchar maThietBi
+        +varchar maKichHoat
+        +int idTaiKhoan
+        +tinyint daKichHoat
+        +datetime thoiGianKichHoat
+        +datetime ngayTao
+        +datetime lanCuoiHoatDong
+        +enum trangThai
+    }
+
+    class yeucaugianhang {
+        +int idYeuCau
+        +int idChuQuanLy
+        +varchar tenDeNghi
+        +varchar diaChiDeNghi
+        +text ghiChuGui
+        +enum trangThai
+        +int idGianHang
+        +datetime ngayGui
+        +datetime ngayXuLy
+    }
+
+    class yeucaugianhang_backup_20260416 {
+        +int idYeuCau
+        +enum loaiYeuCau
+        +int idChuQuanLy
+        +varchar tenGianHang
+        +varchar diaChi
+        +text moTa
+        +varchar ngonNguMoTa
+        +decimal lat
+        +decimal lon
+        +decimal phiHangThang
+        +enum tinhTrangDeXuat
+        +enum trangThaiYeuCau
+        +text ghiChuXuLy
+        +int idTaiKhoanXuLy
+        +int idGianHang
+        +datetime ngayTao
+        +datetime thoiGianXuLy
+    }
+
+    taikhoan "1" --> "0..1" admin : idTaiKhoan
+    taikhoan "1" --> "0..1" chu_quan_ly : idTaiKhoan
+    taikhoan "1" --> "0..1" khachhang : idTaiKhoan
+    taikhoan "1" --> "0..*" thietbi : idTaiKhoan
+
+    chu_quan_ly "1" --> "0..*" gianhang : idChuQuanLy
+    chu_quan_ly "1" --> "0..*" yeucaugianhang : idChuQuanLy
+    gianhang "1" --> "0..*" yeucaugianhang : idGianHang
+
+    gianhang "1" --> "0..*" gianhangngonngu : idGianHang
+    ngonngu "1" --> "0..*" gianhangngonngu : idNgonNgu
+    gianhang "1" --> "0..*" hinhanhgianhang : idGianHang
+    gianhang "1" --> "0..*" monan : idGianHang
+    gianhang "1" --> "0..*" hoadongianhang : idGianHang
+
+    monan "1" --> "0..*" monanngonngu : idMonAn
+    ngonngu "1" --> "0..*" monanngonngu : idNgonNgu
+    monan "1" --> "0..*" hinhanhmonan : idMonAn
+    monan "1" --> "0..*" chitiethoadon : idMonAn
+
+    thietbi "1" --> "0..*" phien_vao_app : idThietBi
+    thietbi "1" --> "0..*" phien_vao_app : maThietBi
+    goidichvu "1" --> "0..*" phien_vao_app : idGoi
+
+    khachhang "1" --> "0..*" hoadon : idKhachHang
+    phien_vao_app "1" --> "0..*" hoadon : idPhienVaoApp
+    goidichvu "1" --> "0..*" hoadon : idGoi
+    hoadon "1" --> "0..*" chitiethoadon : idHoaDon

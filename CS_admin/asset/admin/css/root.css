@@ -1,0 +1,33 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --bg:#f3f7f9;
+  --card:#ffffff;
+  --border:#e5edf1;
+  --text:#0f172a;
+  --muted:#7f8ea3;
+  --primary:#20cfd0;
+  --primary-dark:#14b8b8;
+  --primary-soft:#e9fcfb;
+  --success:#27c46b;
+  --warning:#e7b23f;
+  --info:#4e8dff;
+  --danger:#f06464;
+}
+
+body{
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+button,
+input,
+textarea,
+select{
+  font: inherit;
+}

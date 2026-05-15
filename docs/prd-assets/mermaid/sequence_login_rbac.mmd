@@ -1,0 +1,24 @@
+sequenceDiagram
+    autonumber
+    actor User as Chủ sở hữu / Admin
+    participant Web as Dashboard Web
+    participant AuthAPI as AuthController
+    participant Service as AuthService
+    participant DB as MySQL
+
+    User->>Web: Nhập username + password
+    Web->>AuthAPI: POST /api/auth/login
+    AuthAPI->>Service: LoginAsync(request)
+    Service->>DB: Tìm tài khoản + kiểm tra quyền
+    DB-->>Service: Thông tin tài khoản / role
+
+    alt Đăng nhập hợp lệ
+        Service-->>AuthAPI: JWT / session + role
+        AuthAPI-->>Web: 200 OK
+        Web->>Web: Điều hướng theo role
+        Web-->>User: Vào màn hình Owner hoặc Admin
+    else Sai thông tin
+        Service-->>AuthAPI: Lỗi xác thực
+        AuthAPI-->>Web: 401 Unauthorized
+        Web-->>User: Hiển thị thông báo đăng nhập thất bại
+    end

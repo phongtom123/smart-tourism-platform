@@ -1,0 +1,58 @@
+%%{init: {"theme": "base", "themeVariables": {"background": "#ffffff", "primaryColor": "#f8fafc", "primaryBorderColor": "#475569", "primaryTextColor": "#0f172a", "lineColor": "#334155", "tertiaryColor": "#ffffff", "fontFamily": "Arial"}}}%%
+flowchart TD
+    A([Bắt đầu]) --> B[Người dùng mở app]
+    B --> C{Thiết bị có kết nối mạng?}
+
+    C -->|Có| D[Hệ thống kiểm tra quyền truy cập<br/>trên server/database]
+    D --> E{Quyền truy cập còn hiệu lực<br/>và đúng thiết bị?}
+    E -->|Có| Z[Mở nội dung chính của app]
+    E -->|Không| F[Hiển thị màn hình chọn cách truy cập]
+
+    C -->|Không| G[Hệ thống kiểm tra quyền truy cập<br/>đã lưu trên thiết bị]
+    G --> H{Dữ liệu offline còn hạn<br/>và đúng thiết bị?}
+    H -->|Có| I[Cho vào app bằng quyền truy cập đã lưu]
+    I --> Z
+    H -->|Không| J[Thông báo cần kết nối mạng<br/>để xác thực quyền truy cập]
+    J --> F
+
+    F --> K{Người dùng chọn cách truy cập}
+
+    %% LUỒNG 1: QUÉT QR TOKEN ĐĂNG NHẬP
+    K -->|Quét QR token đăng nhập| L[Mở màn hình quét QR]
+    L --> M[Người dùng quét QR hoặc tải ảnh QR]
+    M --> N{Thiết bị có kết nối mạng<br/>để xác thực QR?}
+    N -->|Không| O[Thông báo không thể xác thực QR khi offline]
+    O --> F
+    N -->|Có| P[Hệ thống kiểm tra QR token<br/>trên server/database]
+    P --> Q{QR token hợp lệ,<br/>còn hạn và đúng thiết bị?}
+    Q -->|Có| R[Lưu quyền truy cập trên thiết bị]
+    R --> Z
+    Q -->|Không| S[Thông báo QR không hợp lệ<br/>hoặc không dùng được trên thiết bị này]
+    S --> F
+
+    %% LUỒNG 2: ĐĂNG KÝ GÓI DỊCH VỤ
+    K -->|Đăng ký gói dịch vụ| T{Thiết bị có kết nối mạng<br/>để đăng ký gói?}
+    T -->|Không| U[Thông báo cần kết nối mạng<br/>để đăng ký gói]
+    U --> F
+    T -->|Có| V[Hiển thị danh sách gói dịch vụ]
+    V --> W[Người dùng chọn gói]
+    W --> X[Hiển thị QR thanh toán]
+    X --> Y{Thanh toán được xác nhận?}
+
+    Y -->|Không| AA[Chờ thanh toán hoặc cho phép thử lại]
+    AA --> X
+
+    Y -->|Có| AB[Hệ thống tạo quyền truy cập theo gói]
+    AB --> AC[Khóa quyền truy cập vào thiết bị hiện tại]
+    AC --> AD[Tạo QR token đăng nhập]
+    AD --> AE{Người dùng muốn nhận QR token<br/>bằng cách nào?}
+
+    AE -->|Gửi qua email| AF[Gửi QR token đến email người dùng]
+    AE -->|Tải trực tiếp| AG[Cho phép tải QR token về thiết bị]
+
+    AF --> AH[Lưu quyền truy cập trên thiết bị]
+    AG --> AH
+    AH --> AI[Người dùng bấm Vào app]
+    AI --> Z
+
+    Z --> ZZ([Kết thúc])

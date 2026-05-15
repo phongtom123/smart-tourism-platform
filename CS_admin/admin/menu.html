@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản lý thực đơn</title>
+  <link rel="stylesheet" href="menu.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <div class="dashboard-shell">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div>
+        <div class="brand">
+          <div class="brand-icon">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <div class="brand-text">
+            <h2>Gourmet POS</h2>
+            <p>ADMIN DASHBOARD</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="#" class="nav-item active">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Menu Management</span>
+          </a>
+
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-receipt"></i>
+            <span>Orders</span>
+          </a>
+
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-users"></i>
+            <span>Customers</span>
+          </a>
+
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-box"></i>
+            <span>Inventory</span>
+          </a>
+        </nav>
+      </div>
+
+      <div>
+        <div class="sidebar-divider"></div>
+
+        <a href="#" class="nav-item settings-link">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+        </a>
+
+        <div class="profile-card">
+          <div class="profile-left">
+            <div class="profile-avatar">A</div>
+            <div class="profile-info">
+              <h4>Admin User</h4>
+              <p>admin@gourmet.com</p>
+            </div>
+          </div>
+          <button class="profile-more">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <h1>Admin Dashboard</h1>
+
+        <div class="topbar-actions">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search dishes, menus..." />
+          </div>
+
+          <button class="icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="dot"></span>
+          </button>
+
+          <button class="primary-btn">
+            <i class="fa-solid fa-plus"></i>
+            <span>Món Ăn Mới</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <section class="menu-page">
+        <div class="page-header">
+          <h2>Quản Lý Thực Đơn</h2>
+          <p>Cập nhật danh sách món ăn và đơn giá của nhà hàng</p>
+        </div>
+
+        <div class="category-tabs">
+          <button class="tab active">Tất cả món</button>
+          <button class="tab">Khai vị</button>
+          <button class="tab">Món chính</button>
+          <button class="tab">Tráng miệng</button>
+          <button class="tab">Đồ uống</button>
+          <button class="tab">Combo</button>
+        </div>
+
+        <div class="panel table-panel">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>HÌNH ẢNH</th>
+                  <th>TÊN MÓN ĂN</th>
+                  <th>MENU / PHÂN LOẠI</th>
+                  <th>ĐƠN GIÁ</th>
+                  <th>TRẠNG THÁI</th>
+                  <th>THAO TÁC</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="food-thumb">
+                      <img src="https://images.unsplash.com/photo-1517244683847-7456b63c5969?q=80&w=300&auto=format&fit=crop" alt="Phở bò">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="food-info">
+                      <h4>Phở Bò Đặc Biệt</h4>
+                      <p>Mã: MA-001</p>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="type-badge">MÓN CHÍNH</span>
+                  </td>
+                  <td class="price">65,000đ</td>
+                  <td>
+                    <span class="status-badge selling">
+                      <span class="status-dot"></span>
+                      Đang bán
+                    </span>
+                  </td>
+                  <td>
+                    <div class="action-icons">
+                      <button><i class="fa-solid fa-pen"></i></button>
+                      <button><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="food-thumb">
+                      <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=300&auto=format&fit=crop" alt="Nem rán">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="food-info">
+                      <h4>Nem Rán Hà Nội</h4>
+                      <p>Mã: MA-002</p>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="type-badge">KHAI VỊ</span>
+                  </td>
+                  <td class="price">45,000đ</td>
+                  <td>
+                    <span class="status-badge selling">
+                      <span class="status-dot"></span>
+                      Đang bán
+                    </span>
+                  </td>
+                  <td>
+                    <div class="action-icons">
+                      <button><i class="fa-solid fa-pen"></i></button>
+                      <button><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="food-thumb">
+                      <img src="https://images.unsplash.com/photo-1550317138-10000687a72b?q=80&w=300&auto=format&fit=crop" alt="Bánh mì">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="food-info">
+                      <h4>Bánh Mì Thịt Nướng</h4>
+                      <p>Mã: MA-003</p>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="type-badge">MÓN CHÍNH</span>
+                  </td>
+                  <td class="price">35,000đ</td>
+                  <td>
+                    <span class="status-badge out">
+                      <span class="status-dot"></span>
+                      Hết hàng
+                    </span>
+                  </td>
+                  <td>
+                    <div class="action-icons">
+                      <button><i class="fa-solid fa-pen"></i></button>
+                      <button><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="food-thumb">
+                      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=300&auto=format&fit=crop" alt="Cà phê sữa đá">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="food-info">
+                      <h4>Cà Phê Sữa Đá</h4>
+                      <p>Mã: MA-004</p>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="type-badge">ĐỒ UỐNG</span>
+                  </td>
+                  <td class="price">29,000đ</td>
+                  <td>
+                    <span class="status-badge selling">
+                      <span class="status-dot"></span>
+                      Đang bán
+                    </span>
+                  </td>
+                  <td>
+                    <div class="action-icons">
+                      <button><i class="fa-solid fa-pen"></i></button>
+                      <button><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="menu-footer">
+          <p>Hiển thị 1 - 4 của 24 món ăn</p>
+
+          <div class="pagination">
+            <button><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

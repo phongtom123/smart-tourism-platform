@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản lý gian hàng</title>
+  <link rel="stylesheet" href="store.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body data-sidebar-active="store">
+  <div class="dashboard-shell">
+    <aside class="sidebar" data-admin-sidebar></aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <!-- TOPBAR GIỮ KIỂU CŨ -->
+      <header class="topbar">
+        <h1>Admin Dashboard</h1>
+
+        <div class="topbar-actions">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Tìm kiếm hệ thống..." />
+          </div>
+
+          <button class="icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="dot"></span>
+          </button>
+
+          <button class="icon-btn">
+            <i class="fa-solid fa-gear"></i>
+          </button>
+
+          <div class="top-avatar">
+            <img src="https://i.pravatar.cc/100?img=32" alt="avatar">
+          </div>
+        </div>
+      </header>
+
+      <!-- CONTENT MỚI -->
+      <section class="booth-page">
+        <div class="page-title-row">
+          <div>
+            <h2>Danh sách Gian hàng Quản lý</h2>
+            <p>Theo dõi, kiểm soát và tối ưu hoạt động của các đối tác kinh doanh.</p>
+          </div>
+
+          <button class="primary-btn">
+            <i class="fa-solid fa-circle-plus"></i>
+            <span>Thêm gian hàng mới</span>
+          </button>
+        </div>
+
+        <div class="toolbar-panel">
+          <div class="toolbar-top">
+            <div class="toolbar-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" placeholder="Tìm kiếm theo tên gian hàng hoặc chủ sở hữu..." />
+            </div>
+
+            <button class="tool-btn">
+              <i class="fa-solid fa-filter"></i>
+              <span>Bộ lọc</span>
+            </button>
+
+            <button class="tool-btn select-like">
+              <span>Danh mục: Tất cả</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <button class="tool-btn">
+              <span>Sắp xếp</span>
+              <i class="fa-solid fa-arrow-down-wide-short"></i>
+            </button>
+          </div>
+
+          <div class="chip-row">
+            <button class="chip active">Tất cả</button>
+            <button class="chip">Ẩm thực</button>
+            <button class="chip">Thời trang</button>
+            <button class="chip">Điện tử</button>
+            <button class="chip">Gia dụng</button>
+            <button class="chip">Làm đẹp</button>
+          </div>
+        </div>
+
+        <div class="booth-grid">
+          <!-- CARD 1 -->
+          <div class="booth-card">
+            <div class="booth-banner banner-blue">
+              <span class="state-badge green">ĐANG HOẠT ĐỘNG</span>
+            </div>
+            <div class="booth-body">
+              <div class="booth-logo dark">BV</div>
+
+              <div class="booth-title-row">
+                <div>
+                  <h3>Bếp Việt Delights</h3>
+                  <p><i class="fa-solid fa-user"></i> Trần Văn Anh</p>
+                </div>
+                <button class="more-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              </div>
+
+              <div class="booth-stats">
+                <div>
+                  <span>DOANH THU</span>
+                  <strong>1.250.000.000đ</strong>
+                </div>
+                <div>
+                  <span>SẢN PHẨM</span>
+                  <strong>142 món</strong>
+                </div>
+              </div>
+
+              <div class="booth-actions">
+                <button class="ghost-btn">Chi tiết</button>
+                <button class="soft-btn">Liên hệ</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="booth-card">
+            <div class="booth-banner banner-peach">
+              <span class="state-badge yellow">TẠM DỪNG</span>
+            </div>
+            <div class="booth-body">
+              <div class="booth-logo dark">NF</div>
+
+              <div class="booth-title-row">
+                <div>
+                  <h3>Neo Fashion Hub</h3>
+                  <p><i class="fa-solid fa-user"></i> Nguyễn Thị Lan</p>
+                </div>
+                <button class="more-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              </div>
+
+              <div class="booth-stats">
+                <div>
+                  <span>DOANH THU</span>
+                  <strong>845.200.000đ</strong>
+                </div>
+                <div>
+                  <span>SẢN PHẨM</span>
+                  <strong>2,105 mẫu</strong>
+                </div>
+              </div>
+
+              <div class="booth-actions">
+                <button class="ghost-btn">Chi tiết</button>
+                <button class="primary-small">Kích hoạt</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="booth-card">
+            <div class="booth-banner banner-purple">
+              <span class="state-badge blue">CHỜ DUYỆT</span>
+            </div>
+            <div class="booth-body">
+              <div class="booth-logo olive">TW</div>
+
+              <div class="booth-title-row">
+                <div>
+                  <h3>TechWorld Mart</h3>
+                  <p><i class="fa-solid fa-user"></i> Lê Hoàng Nam</p>
+                </div>
+                <button class="more-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              </div>
+
+              <div class="booth-stats">
+                <div>
+                  <span>DOANH THU</span>
+                  <strong>0đ</strong>
+                </div>
+                <div>
+                  <span>SẢN PHẨM</span>
+                  <strong>54 món</strong>
+                </div>
+              </div>
+
+              <div class="booth-actions dual">
+                <button class="approve-btn">Duyệt ngay</button>
+                <button class="reject-btn">Từ chối</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="booth-card">
+            <div class="booth-banner banner-mint">
+              <span class="state-badge green">ĐANG HOẠT ĐỘNG</span>
+            </div>
+            <div class="booth-body">
+              <div class="booth-logo dark">HS</div>
+
+              <div class="booth-title-row">
+                <div>
+                  <h3>HomeSweet Home</h3>
+                  <p><i class="fa-solid fa-user"></i> Phạm Minh Tú</p>
+                </div>
+                <button class="more-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              </div>
+
+              <div class="booth-stats">
+                <div>
+                  <span>DOANH THU</span>
+                  <strong>412.000.000đ</strong>
+                </div>
+                <div>
+                  <span>SẢN PHẨM</span>
+                  <strong>682 SKU</strong>
+                </div>
+              </div>
+
+              <div class="booth-actions">
+                <button class="ghost-btn">Chi tiết</button>
+                <button class="soft-btn">Liên hệ</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 5 -->
+          <div class="booth-card">
+            <div class="booth-banner banner-pink">
+              <span class="state-badge green">ĐANG HOẠT ĐỘNG</span>
+            </div>
+            <div class="booth-body">
+              <div class="booth-logo cream">GB</div>
+
+              <div class="booth-title-row">
+                <div>
+                  <h3>Glow Beauty Spa</h3>
+                  <p><i class="fa-solid fa-user"></i> Vũ Mỹ Linh</p>
+                </div>
+                <button class="more-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+              </div>
+
+              <div class="booth-stats">
+                <div>
+                  <span>DOANH THU</span>
+                  <strong>2.140.500.000đ</strong>
+                </div>
+                <div>
+                  <span>SẢN PHẨM</span>
+                  <strong>125 dịch vụ</strong>
+                </div>
+              </div>
+
+              <div class="booth-actions">
+                <button class="ghost-btn">Chi tiết</button>
+                <button class="soft-btn">Liên hệ</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ADD NEW -->
+          <div class="add-card">
+            <div class="add-circle">
+              <i class="fa-solid fa-plus"></i>
+            </div>
+            <h3>Thêm gian hàng mới</h3>
+            <p>Mở rộng mạng lưới đối tác của bạn</p>
+          </div>
+        </div>
+
+        <div class="bottom-row">
+          <p>Hiển thị 5 trên tổng số 42 gian hàng</p>
+
+          <div class="pagination">
+            <button><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../asset/admin/js/sidebar.js" defer></script>
+</body>
+</html>

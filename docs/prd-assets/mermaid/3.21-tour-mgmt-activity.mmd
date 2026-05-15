@@ -1,0 +1,57 @@
+flowchart TD
+    A(["Admin mở trang Quản lý Tour"]) --> B["Hệ thống tải danh sách tour"]
+    B --> C{"Có quyền Admin không?"}
+    C -- Không --> D["Từ chối truy cập\n403 Forbidden"]
+    C -- Có --> E["Hiển thị danh sách tour\nvới bảng: tên, giá, trạng thái,\nsố điểm, ngày tạo"]
+
+    E --> F{"Admin chọn thao tác"}
+
+    F -- Tạo tour mới --> G["Mở form tạo tour"]
+    G --> H["Nhập thông tin tour:\nTên, mô tả, thời gian,\ngiá, hình ảnh"]
+    H --> I["Chọn các điểm tham quan\nvào lộ trình tour"]
+    I --> J["Sắp xếp thứ tự\ncác điểm trên lộ trình"]
+    J --> K{"Dữ liệu hợp lệ?\n- Tên bắt buộc\n- Giá >= 0\n- Ít nhất 2 điểm"}
+    K -- Không --> L["Hiển thị lỗi validation"]
+    L --> H
+    K -- Có --> M["BEGIN TRANSACTION\nLưu tour + lộ trình\nCOMMIT"]
+    M --> N["Thông báo tạo thành công"]
+    N --> E
+
+    F -- Xem chi tiết --> O["GET /api/admin/tours/tourId"]
+    O --> O1["Hiển thị thông tin tour đầy đủ:\nLộ trình, danh sách điểm,\nbản đồ, thống kê"]
+
+    F -- Sửa tour --> P["Mở form chỉnh sửa\nvới dữ liệu hiện tại"]
+    P --> Q["Cập nhật thông tin tour\nhoặc lộ trình"]
+    Q --> R{"Dữ liệu hợp lệ?"}
+    R -- Không --> S["Hiển thị lỗi validation"]
+    S --> Q
+    R -- Có --> T["BEGIN TRANSACTION\nUPDATE tour\nDELETE + INSERT tour_route\nCOMMIT"]
+    T --> U["Thông báo cập nhật thành công"]
+    U --> E
+
+    F -- Đổi trạng thái --> V{"Trạng thái hiện tại?"}
+    V -- active --> W["PATCH status = hidden\nẨn tour khỏi app"]
+    V -- hidden --> X["PATCH status = active\nXuất bản tour lên app"]
+    W --> E
+    X --> E
+
+    F -- Xóa tour --> Y["Hiện dialog xác nhận xóa"]
+    Y --> Z{"Admin xác nhận?"}
+    Z -- Không --> E
+    Z -- Có --> AA["UPDATE tour SET\nis_deleted = 1,\ndeleted_at = NOW()"]
+    AA --> AB["Thông báo xóa thành công"]
+    AB --> E
+
+    F -- Quản lý lộ trình --> AC["GET /api/admin/tours/tourId/route"]
+    AC --> AD["Hiển thị bản đồ\nvới các điểm POI\nvà đường nối lộ trình"]
+    AD --> AE{"Thao tác lộ trình"}
+    AE -- Thêm điểm --> AF["Chọn POI/gian hàng\ntừ danh sách"]
+    AF --> AG["Thêm vào lộ trình\nvới order_index"]
+    AG --> AD
+    AE -- Xóa điểm --> AH["Xóa điểm khỏi lộ trình"]
+    AH --> AD
+    AE -- Sắp xếp lại --> AI["Kéo thả đổi thứ tự\ncác điểm"]
+    AI --> AD
+    AE -- Lưu --> AJ["PUT /api/admin/tours/tourId/route\nBEGIN TRANSACTION\nDELETE cũ + INSERT mới\nCOMMIT"]
+    AJ --> AK["Thông báo lưu thành công"]
+    AK --> E

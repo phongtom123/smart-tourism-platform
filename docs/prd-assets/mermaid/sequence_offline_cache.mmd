@@ -1,0 +1,30 @@
+sequenceDiagram
+    autonumber
+    actor User as Du khách
+    participant App as PoiMapPage
+    participant Poi as PoiService
+    participant Cache as AppDataCacheService
+    participant API as ApiService
+    participant SQLite as SQLiteService
+
+    User->>App: Mở màn hình khám phá
+    App->>Poi: GetAllPoisAsync()
+    Poi->>Cache: GetAsync(lang)
+
+    alt Có internet và API trả dữ liệu
+        Cache->>API: GetAppDataAsync(lang)
+        API-->>Cache: AppDataResponse
+        Cache->>SQLite: UpsertCacheAsync(appdata_lang)
+        Cache-->>Poi: Dữ liệu mới nhất
+    else Offline hoặc API lỗi
+        Cache->>SQLite: GetCacheIfFreshAsync(appdata_lang)
+        alt Có cache còn hạn
+            SQLite-->>Cache: Json cache
+            Cache-->>Poi: Dữ liệu từ SQLite
+        else Không có cache
+            Cache-->>Poi: Dataset rỗng
+        end
+    end
+
+    Poi-->>App: List<PoiItem>
+    App-->>User: Hiển thị POI để xem offline / online

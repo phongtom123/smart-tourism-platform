@@ -1,0 +1,163 @@
+sequenceDiagram
+    actor Admin
+    participant Dashboard as Admin Dashboard
+    participant Controller as AdminController
+    participant Auth as AccountAccessService
+    participant TourSvc as TourService
+    participant DB as MySQL
+
+    rect rgb(240, 248, 255)
+    Note over Admin, DB: XÁC THỰC QUYỀN ADMIN
+    Admin->>Dashboard: Mở trang Quản lý Tour
+    Dashboard->>Controller: GET /api/admin/tours
+    Controller->>Auth: IsAdminAsync(idTaiKhoan)
+    Auth->>DB: Query role admin
+    DB-->>Auth: Hợp lệ / không hợp lệ
+    Auth-->>Controller: Boolean isAdmin
+    end
+
+    alt Không có quyền Admin
+        Controller-->>Dashboard: 403 Forbidden
+        Dashboard-->>Admin: Hiển thị thông báo từ chối
+    end
+
+    rect rgb(240, 255, 240)
+    Note over Admin, DB: TẢI DANH SÁCH TOUR
+    Controller->>TourSvc: GetAllToursAsync()
+    TourSvc->>DB: SELECT * FROM tour LEFT JOIN tour_route LEFT JOIN poi ORDER BY created_at DESC
+    DB-->>TourSvc: Danh sách tour kèm lộ trình
+    TourSvc-->>Controller: List of TourDto
+    Controller-->>Dashboard: 200 OK + JSON danh sách tour
+    Dashboard-->>Admin: Hiển thị bảng danh sách tour
+    end
+
+    rect rgb(255, 255, 240)
+    Note over Admin, DB: TẠO TOUR MỚI
+    Admin->>Dashboard: Bấm Tạo tour mới
+    Dashboard-->>Admin: Hiển thị form tạo tour
+
+    Admin->>Dashboard: Nhập tên, mô tả, thời gian, giá, hình ảnh, trạng thái
+    Admin->>Dashboard: Chọn điểm tham quan và sắp xếp thứ tự
+
+    Dashboard->>Dashboard: Validate dữ liệu phía client (tên bắt buộc, giá >= 0, ít nhất 2 điểm)
+
+    alt Dữ liệu không hợp lệ
+        Dashboard-->>Admin: Hiển thị lỗi validation
+    end
+
+    Dashboard->>Controller: POST /api/admin/tours {name, description, duration, price, image, status, routePoints[]}
+    Controller->>TourSvc: CreateTourAsync(tourDto)
+
+    TourSvc->>DB: BEGIN TRANSACTION
+    TourSvc->>DB: INSERT INTO tour (name, description, duration, price, image_url, status, created_at)
+    DB-->>TourSvc: tourId (AUTO_INCREMENT)
+
+    loop Với mỗi điểm trong routePoints
+        TourSvc->>DB: INSERT INTO tour_route (tour_id, poi_id, order_index, note, estimated_time)
+    end
+
+    TourSvc->>DB: COMMIT TRANSACTION
+    DB-->>TourSvc: Thành công
+
+    TourSvc-->>Controller: TourDto (tour vừa tạo)
+    Controller-->>Dashboard: 201 Created + JSON tour
+    Dashboard-->>Admin: Thông báo tạo tour thành công và cập nhật danh sách
+    end
+
+    rect rgb(240, 248, 255)
+    Note over Admin, DB: XEM CHI TIẾT TOUR
+    Admin->>Dashboard: Bấm xem chi tiết tour
+    Dashboard->>Controller: GET /api/admin/tours/{tourId}
+    Controller->>TourSvc: GetTourByIdAsync(tourId)
+    TourSvc->>DB: SELECT tour.*, tour_route.*, poi.* FROM tour JOIN tour_route JOIN poi WHERE tour.id = tourId ORDER BY order_index
+    DB-->>TourSvc: Chi tiết tour + lộ trình đầy đủ
+    TourSvc-->>Controller: TourDetailDto
+    Controller-->>Dashboard: 200 OK + JSON chi tiết
+    Dashboard-->>Admin: Hiển thị thông tin tour, bản đồ lộ trình, danh sách điểm
+    end
+
+    rect rgb(255, 248, 240)
+    Note over Admin, DB: CẬP NHẬT TOUR
+    Admin->>Dashboard: Bấm Sửa trên tour
+    Dashboard-->>Admin: Hiển thị form chỉnh sửa với dữ liệu hiện tại
+
+    Admin->>Dashboard: Cập nhật thông tin và lộ trình
+    Dashboard->>Dashboard: Validate dữ liệu cập nhật
+
+    Dashboard->>Controller: PUT /api/admin/tours/{tourId} {name, description, duration, price, image, routePoints[]}
+    Controller->>TourSvc: UpdateTourAsync(tourId, tourDto)
+
+    TourSvc->>DB: BEGIN TRANSACTION
+    TourSvc->>DB: UPDATE tour SET name, description, duration, price, image_url, updated_at WHERE id = tourId
+    TourSvc->>DB: DELETE FROM tour_route WHERE tour_id = tourId
+
+    loop Với mỗi điểm mới trong routePoints
+        TourSvc->>DB: INSERT INTO tour_route (tour_id, poi_id, order_index, note, estimated_time)
+    end
+
+    TourSvc->>DB: COMMIT TRANSACTION
+    DB-->>TourSvc: Thành công
+
+    TourSvc-->>Controller: TourDto (đã cập nhật)
+    Controller-->>Dashboard: 200 OK + JSON tour
+    Dashboard-->>Admin: Thông báo cập nhật thành công
+    end
+
+    rect rgb(248, 240, 255)
+    Note over Admin, DB: ĐỔI TRẠNG THÁI TOUR
+    Admin->>Dashboard: Bấm Ẩn hoặc Xuất bản tour
+    Dashboard->>Controller: PATCH /api/admin/tours/{tourId}/status {status: active hoặc hidden}
+    Controller->>TourSvc: UpdateTourStatusAsync(tourId, status)
+    TourSvc->>DB: UPDATE tour SET status = ?, updated_at = NOW() WHERE id = tourId
+    DB-->>TourSvc: Rows affected
+    TourSvc-->>Controller: Kết quả
+    Controller-->>Dashboard: 200 OK
+    Dashboard-->>Admin: Cập nhật trạng thái trên giao diện
+    end
+
+    rect rgb(255, 240, 240)
+    Note over Admin, DB: XÓA TOUR
+    Admin->>Dashboard: Bấm Xóa tour
+    Dashboard-->>Admin: Hiện dialog xác nhận xóa
+
+    alt Admin xác nhận xóa
+        Dashboard->>Controller: DELETE /api/admin/tours/{tourId}
+        Controller->>TourSvc: DeleteTourAsync(tourId)
+        TourSvc->>DB: UPDATE tour SET is_deleted = 1, deleted_at = NOW() WHERE id = tourId
+        DB-->>TourSvc: Rows affected
+        TourSvc-->>Controller: Thành công
+        Controller-->>Dashboard: 200 OK
+        Dashboard-->>Admin: Xóa tour khỏi danh sách và thông báo thành công
+    else Admin hủy
+        Dashboard-->>Admin: Đóng dialog, không thay đổi
+    end
+    end
+
+    rect rgb(240, 255, 248)
+    Note over Admin, DB: QUẢN LÝ LỘ TRÌNH TOUR
+    Admin->>Dashboard: Bấm Quản lý lộ trình trên tour
+    Dashboard->>Controller: GET /api/admin/tours/{tourId}/route
+    Controller->>TourSvc: GetTourRouteAsync(tourId)
+    TourSvc->>DB: SELECT tour_route.*, poi.name, poi.lat, poi.lng FROM tour_route JOIN poi WHERE tour_id = tourId ORDER BY order_index
+    DB-->>TourSvc: Danh sách điểm lộ trình
+    TourSvc-->>Controller: List of RoutePointDto
+    Controller-->>Dashboard: 200 OK + JSON lộ trình
+    Dashboard-->>Admin: Hiển thị bản đồ + danh sách điểm
+
+    Admin->>Dashboard: Thêm, xóa hoặc sắp xếp lại điểm
+    Admin->>Dashboard: Bấm Lưu lộ trình
+    Dashboard->>Controller: PUT /api/admin/tours/{tourId}/route {routePoints[]}
+    Controller->>TourSvc: UpdateTourRouteAsync(tourId, points)
+
+    TourSvc->>DB: BEGIN TRANSACTION
+    TourSvc->>DB: DELETE FROM tour_route WHERE tour_id = tourId
+    loop Với mỗi điểm
+        TourSvc->>DB: INSERT INTO tour_route (tour_id, poi_id, order_index, note, estimated_time)
+    end
+    TourSvc->>DB: COMMIT TRANSACTION
+    DB-->>TourSvc: Thành công
+
+    TourSvc-->>Controller: List of RoutePointDto
+    Controller-->>Dashboard: 200 OK
+    Dashboard-->>Admin: Cập nhật bản đồ lộ trình và thông báo lưu thành công
+    end
