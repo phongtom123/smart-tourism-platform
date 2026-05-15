@@ -12,8 +12,3 @@ C-SA-T includes:
 - An ASP.NET Core backend API.
 - A PHP/XAMPP admin portal.
 - Geofence, QR access, tour, store, invoice, and device activity workflows.
-
-## Privacy Note
-
-All secrets, local configuration files, database dumps, API keys, keystores, and personal test data should stay out of this public repository.
-
