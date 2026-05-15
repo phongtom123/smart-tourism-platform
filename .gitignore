@@ -1,0 +1,27 @@
+# Build output
+**/bin/
+**/obj/
+
+# IDE and local cache
+**/.vs/
+**/.idea/
+**/.vscode/
+**/*.user
+**/*.suo
+**/*.lscache
+
+# Secrets and local config
+**/appsettings.Development.json
+**/Secret/props.txt
+**/*.keystore
+**/*.pfx
+**/*.p12
+**/*.pem
+.env
+.env.*
+
+# Local dumps, backups, logs
+database/local/
+db_backups/
+**/*.log
+.codex-runlogs/
